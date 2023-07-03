@@ -6,12 +6,16 @@ import { CurrentUserContext } from './App';
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-  let { setCurrentUser } = useContext(CurrentUserContext)
+  let { currentUser, setCurrentUser } = useContext(CurrentUserContext)
   const [LUserName, setLUserName] = useState('')
   const [LPassWord, setLPassWord] = useState('')
   const [users, setUsers] = useState('')
   const [validateMsg, setValidateMsg] = useState('')
   let navigate = useNavigate();
+
+  if (currentUser !== null) {
+    navigate('/transactions');
+  }
 
   //get the users
   useEffect(() => {

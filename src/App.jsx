@@ -3,7 +3,7 @@ import React, { useState, useRoutes } from 'react';
 import {Outlet} from 'react-router-dom';
 import DebtHome from './DebtHome'
 import PNF from './PNF';
-import { Routes, Route, Router } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Navbar from './NavBar';
 import Users from './Users';
 import { UserTotalInfo } from './UserTotalInfo'
