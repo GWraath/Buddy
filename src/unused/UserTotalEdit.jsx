@@ -4,7 +4,7 @@ import { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import { Button, TextField } from '@mui/material'
 import { useNavigate } from "react-router-dom";
-import { DebtContext } from './App'
+import { DebtContext } from '../App'
 
 
 export const UserInfoEdit = () => {

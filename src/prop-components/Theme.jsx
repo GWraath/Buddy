@@ -12,7 +12,7 @@ const theme = createTheme({
 }
 );
 
-export default function PlantTheme(prop) {
+export default function PlantTheme(props) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -33,7 +33,7 @@ export default function PlantTheme(prop) {
                         color="text.primary"
                         gutterBottom
                         >
-                          {prop.component}
+                          {props.component}
                         </Typography>
                     </Container>
                 </Box>

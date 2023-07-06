@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Button, TextField } from '@mui/material'
 import { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
-import { CurrentUserContext } from './App';
+import { CurrentUserContext } from '../App';
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -13,9 +13,9 @@ export default function Login() {
   const [validateMsg, setValidateMsg] = useState('')
   let navigate = useNavigate();
 
-  if (currentUser !== null) {
-    navigate('/transactions');
-  }
+  // if (currentUser !== undefined) {
+  //   navigate('/transactions');
+  // }
 
   //get the users
   useEffect(() => {

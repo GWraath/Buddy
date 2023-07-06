@@ -5,7 +5,6 @@ import {TextField, Button} from '@mui/material';
 import {DebtContext} from './App'
 import {PageTypeContext} from './App'
 import {UsersContext} from './App'
-import PlantHome from './DebtHome';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -13,7 +12,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 export default function PlantSearch() {
   let [query, setQuery] = useState()
-  let [textField, setTextField] = useState()
+  let [textField, setTextField] = useState('')
   const {setDebts} = useContext(DebtContext);
   const {setUsers} = useContext(UsersContext);
   const {pageType} = useContext(PageTypeContext);

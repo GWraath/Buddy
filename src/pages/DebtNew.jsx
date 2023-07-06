@@ -6,7 +6,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useNavigate } from "react-router-dom";
-import { UsersContext } from './App'
+import { UsersContext } from '../App'
 
 export const DebtNew = () => {
     // const [transactions, getTransactions] = useState([]);
@@ -44,10 +44,9 @@ export const DebtNew = () => {
     }
 
     const handleDateChange = (date) => {
-        // setDueDate(date.$d);
-        // const stringify = JSON.stringify(date.$d)
-        // const day = date.$d.slice(7,9)
-        setDueDate(date.$d)
+        console.log(`${date.$D}/${date.$M}/${date.$y}`)
+        const dDate = `${date.$D}/${date.$M}/${date.$y}`
+        setDueDate(dDate)
       };
 
 
@@ -92,7 +91,7 @@ export const DebtNew = () => {
                 <div><TextField type='number' onChange={e => setAmount(e.target.value)} label="Custom Amount"></TextField></div><br></br>
                 {/* Due on: <br></br> */}
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker label={"Due date"} value={dueDate} onChange={handleDateChange} renderInput={(params) => <input {...params}/>}/>
+                    <DatePicker label={"Due date"} value={dueDate} onChange={handleDateChange} renderInput={(params) => <input {...params}/>} format='DD/MM/YYYY'/>
                 </LocalizationProvider><br></br>
                 <Button onClick={addToTotal}>Add</Button>
             </form>

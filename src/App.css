@@ -72,8 +72,10 @@
 }
 
 #plantica{
-  position:absolute;
-  left:0vh
+  /* position:absolute;
+  left:0vh */
+  color: #4A8E51;
+  text-align: center;
 }
 
 #link{

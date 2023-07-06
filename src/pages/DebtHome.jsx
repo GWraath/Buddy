@@ -6,10 +6,11 @@ import {
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-import DebtPages from './DebtPages';
-import { DebtContext } from './App';
-import { PageTypeContext } from './App'
+import DebtPages from '../unused/DebtPages';
+import { DebtContext } from '../App';
+import { PageTypeContext } from '../App'
 import { useNavigate } from "react-router-dom";
+import HomeMapComponent from '../components/HomeMapComponent';
 
 function Copyright() {
   return (
@@ -52,8 +53,6 @@ export default function debtHome() {
   //get the debts
   useEffect(() => {
     setPageType('debts')
-    const offset = debtsPerPage * (page - 1)
-    // const axdebts=`http://localhost:8080/api/debts?limit=${debtsPerPage}&offset=${offset}`
     if (currentUser && currentUser.UserAdmin) {
       const axDebts = `http://localhost:8063/api/debts/`
       axios.get(axDebts)
@@ -93,6 +92,7 @@ export default function debtHome() {
       .catch(error => { console.log(error) })
   }
 
+  //pay a debt
   const debtPaid = (payDebt, e) => {
     console.log(payDebt)
     doNotProceed()
@@ -100,7 +100,7 @@ export default function debtHome() {
     const axdebts = `http://localhost:8063/api/debts/put/${payDebt}`
     console.log(axdebts)
     axios.put(axdebts, pay)
-      .then(response => { console.log(response); e.preventDefault()})
+      .then(response => { console.log(response); e.preventDefault() })
       .catch(error => { console.log(error) })
   }
 
@@ -142,63 +142,13 @@ export default function debtHome() {
             {currentUser && currentUser.UserAdmin ? <div><Button variant="outlined" id="buttonWhite" size="small" href={"/debtnew/"}>Add a debt</Button></div> : null}
             {currentUser && currentUser.UserAdmin ? <div><Button variant="outlined" id="buttonWhite" size="small" onClick={filterPaid}>Paid</Button><Button variant="outlined" id="buttonWhite" size="small" onClick={filterUnpaid}>Unpaid</Button></div> : null}<br></br><br></br>
           </Typography>
-          <Typography variant="h6" id="toolDrop">
-          </Typography>
-          <Grid container spacing={4}>
-            {debts.map((debt, index) => (
-              <Grid item key={index} xs={12} sm={6} md={4}>
-                <Card
-                  sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-                >
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    {currentUser && currentUser.UserAdmin ?
-                      <Typography gutterBottom variant="h5" component="h2" className='capitalise'>
-                        {debt.userID}
-                      </Typography> : null}
-                    <Typography>
-                      ${debt.amount}
-                    </Typography>
-                    <Typography>
-                      Verified on: <br></br>
-                      {debt.createdAt.slice(0, 10)}
-                    </Typography>
-                    <Typography>
-                      {debt.createdAt.slice(12, 19)}
-                    </Typography>
-                    <Typography>
-                      Paid on: <br></br>
-                      {debt.createdAt !== debt.updatedAt ?
-                        debt.updatedAt.slice(0, 10)
-                        : null}
-                    </Typography>
-                    <Typography>
-                      {debt.createdAt !== debt.updatedAt ?
-                        debt.updatedAt.slice(12, 19)
-                        : null}
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    {currentUser && currentUser.UserAdmin ? <Button size="small" onClick={() => { debtPaid(debt.id) }}>Paid</Button> : null}
-                    {currentUser && currentUser.UserAdmin ? <Button size="small" onClick={() => { debtDelete(debt.id) }}>Delete</Button> : null}
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
+          <HomeMapComponent debts={debts} currentUser={currentUser} />
         </Container>
       </main>
       {/* Footer */}
       <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
         <Typography variant="h6" align="center" gutterBottom>
           <DebtPages pageHandler={setPage} list={debtList.length} />
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="text.secondary"
-          component="p"
-        >
-          Choose a page to explore more!
         </Typography>
         <Copyright />
       </Box>

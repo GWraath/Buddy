@@ -6,8 +6,8 @@ import {
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-import PlantPages from './DebtPages';
-import { PageTypeContext, UsersContext, DebtContext } from './App'
+// import PlantPages from '../DebtPages';
+import { PageTypeContext, UsersContext, DebtContext } from '../App'
 import { useNavigate } from "react-router-dom";
 
 function Copyright() {
@@ -156,7 +156,7 @@ export default function Users() {
       {/* Footer */}
       <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
         <Typography variant="h6" align="center" gutterBottom>
-          <PlantPages pageHandler={setPage} list={userList.length} />
+          {/* <PlantPages pageHandler={setPage} list={userList.length} /> */}
         </Typography>
         <Typography
           variant="subtitle1"
