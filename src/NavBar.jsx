@@ -1,5 +1,5 @@
-import { React, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { React, useEffect, useState } from 'react'
+import { NavLink, useLocation } from 'react-router-dom'
 import { AppBar, Toolbar, Typography, Button } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -10,10 +10,11 @@ import HeaderComponent from './components/HeaderComponent';
 
 
 const Navbar = () => {
+  const location = useLocation();
   const users = <NavLink id="link" to='/users' exact="true" forcerefresh="true">Users</NavLink>
   const debts = <NavLink id="link" to='/transactions' exact="true" forcerefresh="true">Transactions</NavLink>
-  const clear = <Button onClick={() => setDoISearch(!doISearch)}><ClearIcon id="link" sx={{ mr: 2 }} /></Button>
-  const search = <Button onClick={() => setDoISearch(!doISearch)}><SearchIcon id="link" sx={{ mr: 2 }} /></Button>
+  const clear = <NavLink onClick={() => setDoISearch(!doISearch)} outline='none' ><ClearIcon id="link" sx={{ mr: 2 }} /></NavLink>
+  const search = <NavLink onClick={() => setDoISearch(!doISearch)} outline='none' ><SearchIcon id="link" sx={{ mr: 2 }} /></NavLink>
 
   //gets the logged in user
   const currentUserString = localStorage.getItem('currentUser');
@@ -29,20 +30,20 @@ const Navbar = () => {
             {currentUser && pathname === '/users' ? debts : null}
             {currentUser && currentUser.UserAdmin && pathname === '/transactions' ? users : null}
             {currentUser && pathname === '/profile' ? debts : null}
-            {currentUser && pathname === '/profile' ? users : null}
-            {currentUser && pathname === '/profile' ? null : <NavLink id="link" to='/profile'>{currentUser.username}</NavLink>}
+            {pathname == '/profile' || pathname == '/' ? null : <NavLink id="link" to='/profile'>{currentUser.username}</NavLink>}
             {doISearch ? clear : search}
+            {/* {doISearch ? null : search} */}
             {/* <ConditionalComponent prop={doISearch} true={clear} false={search}/>  */}
           </Typography>
         </Toolbar>
         <Typography variant="h6" id="toolSearch">
-          {currentUser && currentUser.UserAdmin && doISearch ? <Search /> : null}
+          {currentUser && currentUser.UserAdmin && doISearch ? <Search id="link" /> : null}
         </Typography>
       </AppBar>
-      <HeaderComponent/>
+      <HeaderComponent />
     </>
   )
-window.reload
+  window.reload
 }
 
 export default Navbar

@@ -12,7 +12,7 @@ const theme = createTheme({
 }
 );
 
-export default function PlantTheme(props) {
+export default function Theme(props) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

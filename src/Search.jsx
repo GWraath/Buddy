@@ -6,11 +6,11 @@ import {DebtContext} from './App'
 import {PageTypeContext} from './App'
 import {UsersContext} from './App'
 import SearchIcon from '@mui/icons-material/Search';
-import ClearIcon from '@mui/icons-material/Clear';
+import RefreshIcon from '@mui/icons-material/Refresh';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
-export default function PlantSearch() {
+export default function DebtSearch(props) {
   let [query, setQuery] = useState()
   let [textField, setTextField] = useState('')
   const {setDebts} = useContext(DebtContext);
@@ -26,14 +26,14 @@ export default function PlantSearch() {
     },
   }
   );
-  //gets plants is page is plant. gets users if page is user.
+  //gets debts is page is debt. gets users if page is user.
   useEffect(()=> {
     setTextField('')
     if(pageType==='debts'){ 
       if (query){
-      const axPlants=`http://localhost:8063/api/debts/userdebts/${query}`
-      console.log(axPlants)
-      axios.get(axPlants)
+      const axdebts=`http://localhost:8063/api/debts/userdebts/${query}`
+      console.log(axdebts)
+      axios.get(axdebts)
       .then(response=> {console.log(response); setDebts(response.data.data)})
       .catch(error => {console.log(error)})}}
     else if (pageType==='users'){
@@ -43,7 +43,7 @@ export default function PlantSearch() {
         axios.get(axUsers)
         .then(response=> {console.log(response); setUsers(response.data.data)})
         .catch(error => {console.log(error)})}}
-    // else if (query===null) {<PlantHome/>}
+    // else if (query===null) {<debtHome/>}
     },[query])
   
   //if the textfield is empty and button is pushed, reloads the screen. if not, sets the query with input.
@@ -56,7 +56,7 @@ export default function PlantSearch() {
   }
   return (
     <ThemeProvider theme={theme}>
-      <div><TextField InputLabelProps={{style: { color: '#4A8E51', borderColor: '#4A8E51'}}}  label="search" variant='filled' type="text" value={textField} onChange={(e)=>setTextField(e.target.value)}/><Button id="searchButton" onClick={()=>setTheQuery()}>{textField?<ClearIcon sx={{ mr: 2 }} />:<SearchIcon sx={{ mr: 2 }} />}</Button></div>
+      <div><TextField InputLabelProps={{style: { color: '#4A8E51', borderColor: '#4A8E51'}}}  label="search" variant='filled' type="text" value={textField} onChange={(e)=>setTextField(e.target.value)}/><Button id="searchButton" onClick={()=>setTheQuery()}>{textField?<SearchIcon sx={{ mr: 2 }} />:<RefreshIcon sx={{ mr: 2 }} />}</Button></div>
     </ThemeProvider>
   )
 }

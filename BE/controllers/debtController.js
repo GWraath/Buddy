@@ -1,9 +1,13 @@
 "use strict";
 const Models = require("../models");
 
-
 const getDebts = (req, res) => {
-    Models.Debts.findAll({}).then(function (data) {
+    // const limit = JSON.parse(req.query.limit)
+    // const offset = JSON.parse(req.query.offset)
+    Models.Debts.findAll({
+        // limit: limit,
+        // offset: offset
+    }).then(function (data) {
         res.send({ result: 200, data: data })
     }).catch(err => {
         throw err

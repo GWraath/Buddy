@@ -3,7 +3,8 @@ const express = require("express");
 const router = express.Router();
 const Controllers = require("../controllers/debtController");
 
-router.get('/', (req, res) => {  
+router.get('/', (req, res) => {
+    console.log(req.query.limit)  
     Controllers.getDebts(req, res);
 })
 

@@ -4,7 +4,7 @@ Container, Link} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useEffect, useState, useContext} from 'react';
 import axios from 'axios';
-import PlantPages from './DebtPages';
+import PlantPages from '../components/DebtPages';
 import {PageTypeContext, UsersContext} from './App'
 import { useNavigate } from "react-router-dom";
 
@@ -33,7 +33,7 @@ const theme = createTheme({
 }
 );
 
-export default function PlantUsers() {
+export default function UserTransactions() {
   const {setPageType} = useContext(PageTypeContext);
   const {users, setUsers} = useContext(UsersContext);
   const [page, setPage] = useState(1);

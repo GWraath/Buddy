@@ -13,6 +13,10 @@
   }
 }
 
+button:focus {
+  outline: none;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -53,9 +57,11 @@
 }
 
 #toolSearch{
-  position: absolute;
-  right:0.5vh;
-  top: 0.5vh;
+  position: sticky;
+  background-color: white;
+  margin: auto;
+  /* right:0.5vh;
+  top: 0.5vh; */
   background-color:white;
   color: #4A8E51;
 }

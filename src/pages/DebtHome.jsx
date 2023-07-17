@@ -6,7 +6,7 @@ import {
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-import DebtPages from '../unused/DebtPages';
+import DebtPages from '../components/DebtPages';
 import { DebtContext } from '../App';
 import { PageTypeContext } from '../App'
 import { useNavigate } from "react-router-dom";
@@ -43,7 +43,7 @@ export default function debtHome() {
   const [debtList, setDebtList] = useState(0)
   const [deleted, setDeleted] = useState(false)
   const [total, setTotal] = useState(0)
-  const debtsPerPage = 6;
+  // const debtsPerPage = 6;
   const currentUserString = localStorage.getItem('currentUser');
   const currentUser = JSON.parse(currentUserString);
   let navigate = useNavigate();
@@ -53,7 +53,9 @@ export default function debtHome() {
   //get the debts
   useEffect(() => {
     setPageType('debts')
+    // const offset = debtsPerPage * (page-1)
     if (currentUser && currentUser.UserAdmin) {
+      // const axDebts = `http://localhost:8063/api/debts/?limit=${debtsPerPage}&offset=${offset}`
       const axDebts = `http://localhost:8063/api/debts/`
       axios.get(axDebts)
         .then(response => { setDebts(response.data.data); getTotal(response.data.data) })
@@ -65,7 +67,7 @@ export default function debtHome() {
         .then(response => { console.log(response); setDebts(response.data.data); getTotal(response.data.data) })
         .catch(error => { console.log(error) })
     }
-  }, [page, deleted])
+  }, [page])
 
   useEffect(() => {
     axios.get(`http://localhost:8063/api/debts`)
@@ -79,29 +81,6 @@ export default function debtHome() {
     const sum = amountArray.reduce((acc, curr) => acc + curr.amount, 0);
     console.log(sum)
     setTotal(sum)
-  }
-
-  //delete a debt
-  const debtDelete = (delDebt, e) => {
-    e.preventDefault()
-    doNotProceed()
-    const axdebts = `http://localhost:8063/api/debts/delete/${delDebt}`
-    console.log(axdebts)
-    axios.delete(axdebts)
-      .then(response => { console.log(response); setDeleted(true) })
-      .catch(error => { console.log(error) })
-  }
-
-  //pay a debt
-  const debtPaid = (payDebt, e) => {
-    console.log(payDebt)
-    doNotProceed()
-    const pay = { 'paid': true }
-    const axdebts = `http://localhost:8063/api/debts/put/${payDebt}`
-    console.log(axdebts)
-    axios.put(axdebts, pay)
-      .then(response => { console.log(response); e.preventDefault() })
-      .catch(error => { console.log(error) })
   }
 
   const filterPaid = () => {
@@ -123,6 +102,7 @@ export default function debtHome() {
   }
   //call the function
   doNotProceed()
+
 
   return (
     <ThemeProvider theme={theme}>
