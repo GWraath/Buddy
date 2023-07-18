@@ -64,23 +64,21 @@ export const DebtNew = () => {
         console.log(total)
         const newTrans = { 'userID': userId, 'amount': amount, 'total': sum, 'paid': false }
         const axTrans = `http://localhost:8063/api/debts/create`
-        const axUsers = `http://localhost:8063/api/users/put/${userId}`
+        // const axUsers = `http://localhost:8063/api/users/put/${userId}`
         console.log(newTrans)
         axios.post(axTrans, newTrans)
             .then(response => { console.log(response.data); })
             .catch(error => { console.log(error) });
-        axios.post(axUsers, { 'total': sum })
-            .then(response => { console.log(response.data); })
-            .catch(error => { console.log(error) });
+        // axios.put(axUsers, { 'total': sum })
+        //     .then(response => { console.log(response.data); })
+        //     .catch(error => { console.log(error) });
         navigate('/transactions');
     }
 
     return (
         <div className="plantInfo">
-            {/* <img alt='plant' width={400} height={400} src={imgUrl}></img> */}
             Add a transaction
             <form>
-                {/* <br></br><div><TextField type='text' onChange={e => getTotal(e.target.value)} label="User ID"></TextField></div><br></br> */}
                 <br></br><div><TextField type='text' onChange={e => setUserId(e.target.value)} label="User ID"></TextField></div>
 
                 Total owed: {total} <br></br><Button onClick={getInfo}>Get Total</Button><br></br>
