@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">buddy</string>
+    <string name="title_activity_main">buddy</string>
+    <string name="package_name">com.buddy</string>
+    <string name="custom_url_scheme">com.buddy</string>
+</resources>

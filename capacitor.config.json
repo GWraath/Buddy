@@ -1,0 +1,8 @@
+{
+  "appId": "com.buddy",
+  "appName": "buddy",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  }
+}

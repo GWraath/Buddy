@@ -1,0 +1,7 @@
+{
+  "name": "buddy",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "custom"
+}

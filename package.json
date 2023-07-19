@@ -8,9 +8,18 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "host": "vite --host"
+    "host": "vite --host",
+    "ionic:build": "npm run build",
+    "ionic:serve": "vite dev --host"
   },
   "dependencies": {
+    "@capacitor/android": "5.2.1",
+    "@capacitor/app": "5.0.6",
+    "@capacitor/cli": "5.2.1",
+    "@capacitor/core": "5.2.1",
+    "@capacitor/haptics": "5.0.6",
+    "@capacitor/keyboard": "5.0.6",
+    "@capacitor/status-bar": "5.0.6",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@mui/icons-material": "^5.10.3",
