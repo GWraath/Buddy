@@ -36,10 +36,10 @@ export const Profile = () => {
       .catch(error => { console.log(error) });
   }
 
-  //logs user out
+  // logs user out
   const loggingOff = () => {
     localStorage.removeItem('currentUser');
-    navigate('/');
+    navigate('/login');
   }
   return (
     <>

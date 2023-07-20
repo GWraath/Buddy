@@ -12,7 +12,7 @@ import HeaderComponent from './components/HeaderComponent';
 const Navbar = () => {
   const location = useLocation();
   const users = <NavLink id="link" to='/users' exact="true" forcerefresh="true">Users</NavLink>
-  const debts = <NavLink id="link" to='/transactions' exact="true" forcerefresh="true">Transactions</NavLink>
+  const debts = <NavLink id="link" to='/' exact="true" forcerefresh="true">Transactions</NavLink>
   const clear = <NavLink onClick={() => setDoISearch(!doISearch)} outline='none' ><ClearIcon id="link" sx={{ mr: 2 }} /></NavLink>
   const search = <NavLink onClick={() => setDoISearch(!doISearch)} outline='none' ><SearchIcon id="link" sx={{ mr: 2 }} /></NavLink>
 
@@ -28,9 +28,9 @@ const Navbar = () => {
         <Toolbar id="tool">
           <Typography variant="h6" color="inherit" noWrap id="toolItems">
             {currentUser && pathname === '/users' ? debts : null}
-            {currentUser && currentUser.UserAdmin && pathname === '/transactions' ? users : null}
+            {currentUser && currentUser.UserAdmin && pathname === '/' ? users : null}
             {currentUser && pathname === '/profile' ? debts : null}
-            {pathname == '/profile' || pathname == '/' ? null : <NavLink id="link" to='/profile'>{currentUser.username}</NavLink>}
+            {pathname == '/profile' || pathname == '/login' ? null : <NavLink id="link" to='/profile'>{currentUser.username}</NavLink>}
             {doISearch ? clear : search}
             {/* {doISearch ? null : search} */}
             {/* <ConditionalComponent prop={doISearch} true={clear} false={search}/>  */}

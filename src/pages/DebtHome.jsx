@@ -11,6 +11,7 @@ import { DebtContext } from '../App';
 import { PageTypeContext } from '../App'
 import { useNavigate } from "react-router-dom";
 import HomeMapComponent from '../components/HomeMapComponent';
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 function Copyright() {
   return (
@@ -41,7 +42,8 @@ export default function debtHome() {
   const { debts, setDebts } = useContext(DebtContext);
   const [page, setPage] = useState(1);
   const [debtList, setDebtList] = useState(0)
-  const [deleted, setDeleted] = useState(false)
+  const [filter, setFilter] = useState([])
+  const [isPaid, setIsPaid] = useState(false)
   const [total, setTotal] = useState(0)
   // const debtsPerPage = 6;
   const currentUserString = localStorage.getItem('currentUser');
@@ -58,7 +60,7 @@ export default function debtHome() {
       // const axDebts = `http://localhost:8063/api/debts/?limit=${debtsPerPage}&offset=${offset}`
       const axDebts = `http://localhost:8063/api/debts/`
       axios.get(axDebts)
-        .then(response => { setDebts(response.data.data); getTotal(response.data.data) })
+        .then(response => { getTotal(response.data.data); filterUnpaid(response.data.data) })
         .catch(error => { console.log(error) })
     }
     else {
@@ -85,13 +87,17 @@ export default function debtHome() {
 
   const filterPaid = () => {
     const filteredArray = debts.filter((transaction) => transaction.paid === true)
-    setDebts(filteredArray)
+    setFilter(filteredArray)
+    getTotal(filteredArray)
+    setIsPaid(true)
   }
 
-  const filterUnpaid = () => {
-    const filteredArray = debts.filter((transaction) => transaction.paid === false)
-    setDebts(filteredArray)
-    getTotal(debts)
+  const filterUnpaid = (response) => {
+    const filteredTransaction = response.filter((transaction) => transaction.paid === false)
+    const filteredDebt = debts.filter((transaction) => transaction.paid === false)
+    {isPaid ? setFilter(filteredDebt): setFilter(filteredTransaction)}
+    {isPaid ? getTotal(debts): getTotal(response)}
+    setIsPaid(false)
   }
 
   //if non user clicks delete, redirect to pna
@@ -117,12 +123,13 @@ export default function debtHome() {
             color="text.primary"
             gutterBottom
           >
-            Transactions for {currentUser.name}<br></br><br></br>
+            Transactions for {currentUser.name}<br></br>
             Amount owed: ${total}
             {currentUser && currentUser.UserAdmin ? <div><Button variant="outlined" id="buttonWhite" size="small" href={"/debtnew/"}>Add a debt</Button></div> : null}
-            {currentUser && currentUser.UserAdmin ? <div><Button variant="outlined" id="buttonWhite" size="small" onClick={filterPaid}>Paid</Button><Button variant="outlined" id="buttonWhite" size="small" onClick={filterUnpaid}>Unpaid</Button></div> : null}<br></br><br></br>
+            {currentUser && currentUser.UserAdmin && isPaid ? <Button variant="outlined" id="buttonWhite" size="small" onClick={filterUnpaid}>Unpaid</Button>: <Button variant="outlined" id="buttonWhite" size="small" onClick={filterPaid}>Paid</Button>}
+            <div><Button variant="outlined" id="buttonWhite" size="small"><RefreshIcon onClick={()=> window.location.reload()}/></Button></div>
           </Typography>
-          <HomeMapComponent debts={debts} currentUser={currentUser} />
+          <HomeMapComponent debts={filter} currentUser={currentUser} />
         </Container>
       </main>
       {/* Footer */}

@@ -10,6 +10,7 @@ import { Profile } from './pages/Profile';
 import PageNotAllowed from './pages/PNA';
 import Theme from './prop-components/Theme';
 import { DebtNew } from './pages/DebtNew';
+import NewLogin from './pages/NewLogin';
 
 export const DebtContext = React.createContext();
 export const UsersContext = React.createContext();
@@ -32,10 +33,11 @@ function App() {
             <VariableContext.Provider value={{variable, setVariable}}>
                 <Navbar />
                 <Routes>
-                  <Route path='/' element={<Theme component={<Login/>}/>}/>
+                  <Route path='/login' element={<Theme component={<Login/>}/>}/>
+                  {/* <Route path='/loginnew' element={<Theme component={<NewLogin/>}/>}/> */}
                   <Route path='/debtnew' element={<Theme component={<DebtNew/>}/>} />
                   <Route path='/users' element={<Users />} />
-                  <Route path='/transactions' element={<Theme component={<DebtHome/>}/>} />
+                  <Route path='/' element={<Theme component={<DebtHome/>}/>} />
                   <Route path='/profile' element={<Theme component={<Profile/>}/>} />
                   <Route path='/pna' element={<Theme component={<PageNotAllowed/>}/>} />
                   <Route path='*' element={<Theme component={<PNF/>}/>}/>

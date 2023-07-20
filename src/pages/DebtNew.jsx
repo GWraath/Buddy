@@ -72,7 +72,7 @@ export const DebtNew = () => {
         // axios.put(axUsers, { 'total': sum })
         //     .then(response => { console.log(response.data); })
         //     .catch(error => { console.log(error) });
-        navigate('/transactions');
+        navigate('/');
     }
 
     return (

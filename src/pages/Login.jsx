@@ -14,7 +14,7 @@ export default function Login() {
   let navigate = useNavigate();
 
   // if (currentUser !== undefined) {
-  //   navigate('/transactions');
+  //   navigate('/profile');
   // }
 
   //get the users
@@ -41,7 +41,7 @@ export default function Login() {
           console.log(u.username, u.password, u.UserAdmin)
           setCurrentUser(u)
           localStorage.setItem('currentUser', JSON.stringify(u))
-          navigate('/transactions');
+          navigate('/');
         }
         else {
           setValidateMsg('Incorrect password, please try again.');
