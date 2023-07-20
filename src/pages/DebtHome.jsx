@@ -41,7 +41,6 @@ export default function debtHome() {
   const { setPageType } = useContext(PageTypeContext);
   const { debts, setDebts } = useContext(DebtContext);
   const [page, setPage] = useState(1);
-  const [debtList, setDebtList] = useState(0)
   const [filter, setFilter] = useState([])
   const [isPaid, setIsPaid] = useState(false)
   const [total, setTotal] = useState(0)
@@ -60,7 +59,7 @@ export default function debtHome() {
       // const axDebts = `http://localhost:8063/api/debts/?limit=${debtsPerPage}&offset=${offset}`
       const axDebts = `http://localhost:8063/api/debts/`
       axios.get(axDebts)
-        .then(response => { getTotal(response.data.data); filterUnpaid(response.data.data) })
+        .then(response => { getTotal(response.data.data); filterUnpaid(response.data.data); setDebts(response.data.data) })
         .catch(error => { console.log(error) })
     }
     else {
@@ -71,11 +70,6 @@ export default function debtHome() {
     }
   }, [page])
 
-  useEffect(() => {
-    axios.get(`http://localhost:8063/api/debts`)
-      .then(response => { setDebtList(response.data) })
-      .catch(error => { console.log(error) })
-  }, [])
 
   const getTotal = (transactions) => {
     const filteredArray = transactions.filter((transaction) => transaction.paid === false)
@@ -94,9 +88,9 @@ export default function debtHome() {
 
   const filterUnpaid = (response) => {
     const filteredTransaction = response.filter((transaction) => transaction.paid === false)
-    const filteredDebt = debts.filter((transaction) => transaction.paid === false)
-    {isPaid ? setFilter(filteredDebt): setFilter(filteredTransaction)}
-    {isPaid ? getTotal(debts): getTotal(response)}
+    setFilter(filteredTransaction)
+    getTotal(response)
+    console.log()
     setIsPaid(false)
   }
 
@@ -126,7 +120,7 @@ export default function debtHome() {
             Transactions for {currentUser.name}<br></br>
             Amount owed: ${total}
             {currentUser && currentUser.UserAdmin ? <div><Button variant="outlined" id="buttonWhite" size="small" href={"/debtnew/"}>Add a debt</Button></div> : null}
-            {currentUser && currentUser.UserAdmin && isPaid ? <Button variant="outlined" id="buttonWhite" size="small" onClick={filterUnpaid}>Unpaid</Button>: <Button variant="outlined" id="buttonWhite" size="small" onClick={filterPaid}>Paid</Button>}
+            {currentUser && currentUser.UserAdmin && isPaid ? <Button variant="outlined" id="buttonWhite" size="small" onClick={()=>filterUnpaid(debts)}>Unpaid</Button>: <Button variant="outlined" id="buttonWhite" size="small" onClick={filterPaid}>Paid</Button>}
             <div><Button variant="outlined" id="buttonWhite" size="small"><RefreshIcon onClick={()=> window.location.reload()}/></Button></div>
           </Typography>
           <HomeMapComponent debts={filter} currentUser={currentUser} />
@@ -135,7 +129,7 @@ export default function debtHome() {
       {/* Footer */}
       <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
         <Typography variant="h6" align="center" gutterBottom>
-          <DebtPages pageHandler={setPage} list={debtList.length} />
+          <DebtPages pageHandler={setPage} list={debts.length} />
         </Typography>
         <Copyright />
       </Box>
