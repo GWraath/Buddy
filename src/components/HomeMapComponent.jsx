@@ -8,27 +8,29 @@ import axios from 'axios';
 
 export default function HomeMapComponent(props) {
 
-    
-      //delete a debt
-  const debtDelete = (delDebt, e) => {
-    e.preventDefault()
-    const axdebts = `http://localhost:8063/api/debts/delete/${delDebt}`
-    console.log(axdebts)
-    axios.delete(axdebts)
-      .then(response => { console.log(response); setDeleted(true) })
-      .catch(error => { console.log(error) })
-  }
 
-  //pay a debt
-  const debtPaid = (payDebt, e) => {
-    console.log(payDebt)
-    const pay = { 'paid': true }
-    const axdebts = `http://localhost:8063/api/debts/put/${payDebt}`
-    console.log(axdebts)
-    axios.put(axdebts, pay)
-      .then(response => { console.log(response); e.preventDefault() })
-      .catch(error => { console.log(error) })
-  }
+    //delete a debt
+    const debtDelete = (delDebt, e) => {
+        // e.preventDefault()
+        const axdebts = `http://localhost:8063/api/debts/delete/${delDebt}`
+        console.log(axdebts)
+        axios.delete(axdebts)
+            .then(response => { console.log(response); setDeleted(true) })
+            .catch(error => { console.log(error) })
+        window.location.reload()
+    }
+
+    //pay a debt
+    const debtPaid = (payDebt, e) => {
+        console.log(payDebt)
+        const pay = { 'paid': true }
+        const axdebts = `http://localhost:8063/api/debts/put/${payDebt}`
+        console.log(axdebts)
+        axios.put(axdebts, pay)
+            .then(response => { console.log(response); e.preventDefault() })
+            .catch(error => { console.log(error) })
+        window.location.reload()
+    }
     return (
         <div>
             <Grid container spacing={4}>

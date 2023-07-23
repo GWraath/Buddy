@@ -5,17 +5,18 @@ import {TextField, Button} from '@mui/material';
 import {DebtContext} from './App'
 import {PageTypeContext} from './App'
 import {UsersContext} from './App'
+import {SearchContext} from './App'
 import SearchIcon from '@mui/icons-material/Search';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
 export default function DebtSearch(props) {
-  let [query, setQuery] = useState()
   let [textField, setTextField] = useState('')
   const {setDebts} = useContext(DebtContext);
   const {setUsers} = useContext(UsersContext);
   const {pageType} = useContext(PageTypeContext);
+  const {query, setQuery} = useContext(SearchContext);
 
   //sets the theme
   const theme = createTheme({

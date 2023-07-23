@@ -9,6 +9,7 @@ import axios from 'axios';
 import DebtPages from '../components/DebtPages';
 import { DebtContext } from '../App';
 import { PageTypeContext } from '../App'
+import { SearchContext } from '../App'
 import { useNavigate } from "react-router-dom";
 import HomeMapComponent from '../components/HomeMapComponent';
 import RefreshIcon from '@mui/icons-material/Refresh';
@@ -40,6 +41,7 @@ const theme = createTheme({
 export default function debtHome() {
   const { setPageType } = useContext(PageTypeContext);
   const { debts, setDebts } = useContext(DebtContext);
+  const { query } = useContext(SearchContext);
   const [page, setPage] = useState(1);
   const [filter, setFilter] = useState([])
   const [isPaid, setIsPaid] = useState(false)
@@ -48,8 +50,6 @@ export default function debtHome() {
   const currentUserString = localStorage.getItem('currentUser');
   const currentUser = JSON.parse(currentUserString);
   let navigate = useNavigate();
-
-
 
   //get the debts
   useEffect(() => {
@@ -68,6 +68,7 @@ export default function debtHome() {
         .then(response => { console.log(response); setDebts(response.data.data); getTotal(response.data.data) })
         .catch(error => { console.log(error) })
     }
+    // query!==''?()=>filterUnpaid(debts):null
   }, [page])
 
 
@@ -103,6 +104,7 @@ export default function debtHome() {
   //call the function
   doNotProceed()
 
+  
 
   return (
     <ThemeProvider theme={theme}>
@@ -120,16 +122,17 @@ export default function debtHome() {
             Transactions for {currentUser.name}<br></br>
             Amount owed: ${total}
             {currentUser && currentUser.UserAdmin ? <div><Button variant="outlined" id="buttonWhite" size="small" href={"/debtnew/"}>Add a debt</Button></div> : null}
-            {currentUser && currentUser.UserAdmin && isPaid ? <Button variant="outlined" id="buttonWhite" size="small" onClick={()=>filterUnpaid(debts)}>Unpaid</Button>: <Button variant="outlined" id="buttonWhite" size="small" onClick={filterPaid}>Paid</Button>}
+            {currentUser && currentUser.UserAdmin && isPaid || query!=='' ? <Button variant="outlined" id="buttonWhite" size="small" onClick={()=>filterUnpaid(debts)}>Unpaid</Button>: <Button variant="outlined" id="buttonWhite" size="small" onClick={filterPaid}>Paid</Button>}
             <div><Button variant="outlined" id="buttonWhite" size="small"><RefreshIcon onClick={()=> window.location.reload()}/></Button></div>
           </Typography>
+          {/* {query!==''?<HomeMapComponent debts={debts} currentUser={currentUser} />: <HomeMapComponent debts={filter} currentUser={currentUser} />} */}
           <HomeMapComponent debts={filter} currentUser={currentUser} />
         </Container>
       </main>
       {/* Footer */}
       <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
         <Typography variant="h6" align="center" gutterBottom>
-          <DebtPages pageHandler={setPage} list={debts.length} />
+          <DebtPages pageHandler={setPage} list={filter.length} />
         </Typography>
         <Copyright />
       </Box>
