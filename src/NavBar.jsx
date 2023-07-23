@@ -27,13 +27,10 @@ const Navbar = () => {
       <AppBar position="sticky" className='AppBar' sx={{ backgroundColor: '#4A8E51' }}>
         <Toolbar id="tool">
           <Typography variant="h6" color="inherit" noWrap id="toolItems">
-            {currentUser && pathname === '/users' ? debts : null}
-            {currentUser && currentUser.UserAdmin && pathname === '/' ? users : null}
-            {currentUser && pathname === '/profile' ? debts : null}
+            {currentUser && currentUser.UserAdmin && pathname !== '/users' ? users : null}
+            {currentUser && pathname !== '/' ? debts : null}
             {pathname == '/profile' || pathname == '/login' ? null : <NavLink id="link" to='/profile'>{currentUser.username}</NavLink>}
             {doISearch ? clear : search}
-            {/* {doISearch ? null : search} */}
-            {/* <ConditionalComponent prop={doISearch} true={clear} false={search}/>  */}
           </Typography>
         </Toolbar>
         <Typography variant="h6" id="toolSearch">
