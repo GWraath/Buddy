@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { TextField, Button } from "@mui/material";
 import axios from "axios";
 export default function NewLogin() {
@@ -21,6 +21,9 @@ export default function NewLogin() {
       );
       const { token } = response.data;
       localStorage.setItem("token", token);
+      console.log(response.data)
+      // setCurrentUser(token);
+      // navigate("/");
     } catch (error) {
       console.error(error);
     }

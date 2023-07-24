@@ -55,7 +55,7 @@ const deleteUsers = (req, res) => {
 const loginUser = (req, res) => {
     // Find the user with the given email in the User model
     console.log(req.body.username)
-    Models.User.findOne({where: { username: req.body.username }}).then(async function (user) {
+    Models.Users.findOne({where: { username: req.body.username }}).then(async function (user) {
         // If the user exists and the password is correct, send the user data as response
         if (user && (await bcrypt.compare(req.body.password, user.password))) {
              res.send({ result: 200, data: user })

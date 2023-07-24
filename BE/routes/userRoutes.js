@@ -20,7 +20,7 @@ router.post('/create', (req, res) => {
 // Setting up a POST request for the "/login" endpoint
 router.post('/login', (req, res) => {
     // Calling the loginUser function from the userController module, passing in the request and response objects
-    // console.log(req.body.username)
+    console.log(req.body.passwordfr54)
     Controllers.loginUser(req, res);
 });
 
