@@ -17,6 +17,13 @@ router.post('/create', (req, res) => {
     Controllers.createUsers(req.body, res)
 })
 
+// Setting up a POST request for the "/login" endpoint
+router.post('/login', (req, res) => {
+    // Calling the loginUser function from the userController module, passing in the request and response objects
+    // console.log(req.body.username)
+    Controllers.loginUser(req, res);
+});
+
 router.put('/put/:id', (req, res) => {
     console.log('test')
     Controllers.updateUsers(req, res)

@@ -11,13 +11,13 @@ export default function NewLogin() {
 
   const handleLogin = async () => {
     // e.preventDefault()
-    const email = LUserName;
+    const username = LUserName;
     const password = LPassWord;
-    console.log(email)
+    console.log(username)
     try {
       const response = await axios.post(
         "http://localhost:8063/api/users/login",
-        { email, password }
+        { username, password }
       );
       const { token } = response.data;
       localStorage.setItem("token", token);
