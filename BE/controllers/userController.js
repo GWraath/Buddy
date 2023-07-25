@@ -20,7 +20,6 @@ const getUsersByID = (req, res) => {
 }
 
 const createUsers = (data, res) => {
-    console.log('createIngredients')
     Models.Users.create(data).then(function (data) {
         res.send({ result: 200, data: data })
     }).catch(err => {
@@ -29,7 +28,6 @@ const createUsers = (data, res) => {
 }
 
 const updateUsers = (req, res) => {
-    console.log('test')
     Models.Users.update(req.body, {
         where: {
             id:
@@ -51,10 +49,25 @@ const deleteUsers = (req, res) => {
     })
 }
 
+// Function to create a new user
+const createUser = async(data, res) => {
+    // Hash the user's password
+    data.password = await bcrypt.hash(data.password, 10);
+    // Create a new user in the User model
+    Models.Users.create(data).then(function (data) {
+        // Send the data as response
+        res.send({ result: 200, data: data })
+    }).catch(err => {
+        // If there is an error, throw it
+        throw err
+    })
+}
+
 // Function to login a user
 const loginUser = (req, res) => {
     // Find the user with the given email in the User model
     console.log(req.body.username)
+    console.log(req.body.password)
     Models.Users.findOne({where: { username: req.body.username }}).then(async function (user) {
         // If the user exists and the password is correct, send the user data as response
         if (user && (await bcrypt.compare(req.body.password, user.password))) {
@@ -70,5 +83,5 @@ const loginUser = (req, res) => {
 }
 
 module.exports = {
-    getUsers, createUsers, updateUsers, deleteUsers, getUsersByID, loginUser
+    getUsers, createUsers, updateUsers, deleteUsers, getUsersByID, loginUser, createUser
 }

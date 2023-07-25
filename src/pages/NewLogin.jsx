@@ -1,12 +1,14 @@
 import React from "react";
 import { useState, useContext } from "react";
 import { TextField, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { CurrentUserContext } from "../App";
 import axios from "axios";
 export default function NewLogin() {
-  // let { setCurrentUser } = useContext(CurrentUserContext)
+  const { setCurrentUser } = useContext(CurrentUserContext)
+  const navigate = useNavigate()
   const [LUserName, setLUserName] = useState("");
   const [LPassWord, setLPassWord] = useState("");
-  const [users, setUsers] = useState("");
   const [validateMsg, setValidateMsg] = useState("");
 
   const handleLogin = async () => {
@@ -21,8 +23,8 @@ export default function NewLogin() {
       );
       const { token } = response.data;
       localStorage.setItem("token", token);
-      console.log(response.data)
-      // setCurrentUser(token);
+      console.log(token)
+      setCurrentUser(token);
       // navigate("/");
     } catch (error) {
       console.error(error);

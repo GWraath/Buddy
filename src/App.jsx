@@ -37,7 +37,7 @@ function App() {
                 <Navbar />
                 <Routes>
                   {/* <Route path='/login' element={<Theme component={<Login />} />} /> */}
-                  <Route path='/login' element={<Theme component={<Login/>}/>}/>
+                  <Route path='/login' element={<Theme component={<NewLogin/>}/>}/>
                   <Route path='/debtnew' element={<Theme component={<DebtNew />} />} />
                   <Route path='/users' element={<Users />} />
                   <Route path='/' element={<Theme component={<DebtHome />} />} />
