@@ -15,9 +15,9 @@ export default function useLogic() {
         setIsPaid(false)
         return { filter, isPaid }
       }
-      case 'paid': {
-        console.log('test')
-      }
+      // case 'paid': {
+      //   return
+      // }
       default:
         return state
     }

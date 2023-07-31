@@ -10,10 +10,11 @@ import DebtPages from '../components/DebtPages';
 import { DebtContext } from '../App';
 import { PageTypeContext } from '../App'
 import { SearchContext } from '../App'
-// import {useLogic} from '../hooks/useLogic';
+// import useLogic from '../hooks/useLogic';
 import { useNavigate } from "react-router-dom";
 import HomeMapComponent from '../components/HomeMapComponent';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import FilterComponent from '../components/FilterComponent';
 
 function Copyright() {
   return (
@@ -113,6 +114,7 @@ export default function debtHome() {
 
   return (
     <ThemeProvider theme={theme}>
+      <FilterComponent paid={isPaid} response={filter} currentUser={currentUser}/>
       <CssBaseline />
       <main>
         <Container sx={{ py: 8 }} maxWidth="md">
@@ -130,7 +132,6 @@ export default function debtHome() {
             {currentUser && currentUser.UserAdmin && isPaid || query !== '' ? <Button variant="outlined" id="buttonWhite" size="small" onClick={() => filterUnpaid(debts)}>Unpaid</Button> : <Button variant="outlined" id="buttonWhite" size="small" onClick={filterPaid}>Paid</Button>}
             <div><Button variant="outlined" id="buttonWhite" size="small"><RefreshIcon onClick={() => window.location.reload()} /></Button></div>
           </Typography>
-          {/* {query!==''?<HomeMapComponent debts={debts} currentUser={currentUser} />: <HomeMapComponent debts={filter} currentUser={currentUser} />} */}
           <HomeMapComponent debts={filter} currentUser={currentUser} />
         </Container>
       </main>
