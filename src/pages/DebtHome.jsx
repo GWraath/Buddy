@@ -86,7 +86,7 @@ export default function debtHome() {
     console.log()
     setIsPaid(false)
   }
-
+  
   //if non user clicks delete, redirect to pna
   const doNotProceed = () => {
     if (currentUser === null) {

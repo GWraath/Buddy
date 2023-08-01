@@ -130,7 +130,7 @@ export default function Users() {
                       {user.name}
                     </Typography>
                     <Typography>
-                      {user.totalOwed}
+                      {user.total}
                     </Typography>
                   </CardContent>
                   <CardActions>

@@ -24,12 +24,11 @@ export const DebtNew = () => {
         }
     }
     doNotProceed()
-    console.log(typeof(dueDate))
 
     const getInfo = () => {
         axios.get(`http://localhost:8063/api/debts/userdebts/${userId}`)
             .then(response => {
-                console.log(response.data.data);
+                console.log(response);
                 getTotal(response.data.data)
             })
             .catch(error => { console.log(error) })
@@ -48,7 +47,6 @@ export const DebtNew = () => {
         const month = date.$M
         const day = date.$D
         console.log(`${date.$D}/${date.$M}/${date.$y}`)
-        const dDate = `${date.$y}/${date.$M}${date.$D} 00:00:00`
         const nDate = new Date(year,month,day)
         console.log(nDate)
         setDueDate(nDate)
@@ -61,22 +59,22 @@ export const DebtNew = () => {
     const addToTotal = () => {
         const sum = total + amount
         parseInt(sum)
+        console.log(total)
         transAdd(sum)
     }
 
     //adds a transaction
     const transAdd = (sum) => {
-        console.log(dueDate)
         const newTrans = { 'userID': userId, 'amount': amount, 'duedate': dueDate ,'total': sum, 'paid': false }
         const axTrans = `http://localhost:8063/api/debts/create`
-        // const axUsers = `http://localhost:8063/api/users/put/${userId}`
+        const axUsers = `http://localhost:8063/api/users/put/${userId}`
         console.log(newTrans)
         axios.post(axTrans, newTrans)
             .then(response => { console.log(response.data); })
             .catch(error => { console.log(error) });
-        // axios.put(axUsers, { 'total': sum })
-        //     .then(response => { console.log(response.data); })
-        //     .catch(error => { console.log(error) });
+        axios.put(axUsers, { 'total': sum })
+            .then(response => { console.log(response.data); })
+            .catch(error => { console.log(error) });
         navigate('/');
     }
 
@@ -84,7 +82,7 @@ export const DebtNew = () => {
         <div className="plantInfo">
             Add a transaction
             <form>
-                <br></br><div><TextField type='text' onChange={e => setUserId(e.target.value)} label="User ID"></TextField></div>
+                <br></br><div><TextField type='text' onChange={(e) =>{ setUserId(e.target.value); getInfo()}} label="User ID"></TextField></div>
 
                 Total owed: {total} <br></br><Button onClick={getInfo}>Get Total</Button><br></br>
 
