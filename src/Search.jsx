@@ -2,10 +2,10 @@ import React from 'react'
 import axios from 'axios'
 import { useState, useEffect, useContext } from 'react'
 import {TextField, Button} from '@mui/material';
-// import {DebtContext} from './App'
-// import {PageTypeContext} from './App'
-// import {UsersContext} from './App'
-// import {SearchContext} from './App'
+import {DebtContext} from './context/DebtContext'
+import {PageTypeContext} from './context/PageTypeContext'
+import {UsersContext} from './context/UserContext'
+import {SearchContext} from './context/SearchContext'
 import SearchIcon from '@mui/icons-material/Search';
 import RefreshIcon from '@mui/icons-material/Refresh';
 

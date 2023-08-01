@@ -8,26 +8,26 @@ import { DebtContextHolder } from './context/DebtContext';
 import { SearchHolder } from './context/SearchContext';
 import { UserContextHolder } from './context/UserContext';
 import { VariableHolder } from './context/VariableContext';
+import { FunctionHolder } from './context/FunctionContext';
 
 function App() {
-
   return (
-    <>
       <CurrentUserHolder>
         <PageTypeHolder>
           <DebtContextHolder>
             <SearchHolder>
               <UserContextHolder>
                 <VariableHolder>
-                  <Navbar />
-                  <AppRoutes />
+                  <FunctionHolder>
+                    <Navbar />
+                    <AppRoutes />
+                  </FunctionHolder>
                 </VariableHolder>
               </UserContextHolder>
             </SearchHolder>
           </DebtContextHolder>
         </PageTypeHolder>
       </CurrentUserHolder>
-    </>
   );
 }
 

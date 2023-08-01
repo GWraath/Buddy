@@ -134,7 +134,7 @@ export default function Users() {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" href={"/userinfoedit/" + user.id}>View</Button>
+                    <Button size="small" href={"/userinfo/" + user.id}>View</Button>
                     <Button size="small" onClick={() => { userDelete(user.id) }}>Delete</Button>
                   </CardActions>
                 </Card>
