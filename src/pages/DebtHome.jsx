@@ -1,15 +1,12 @@
 import * as React from 'react';
-import {
-  Button, Card, CardActions, CardContent, CardMedia, CssBaseline, Grid,
-  Box, Typography, Container, Link
-} from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Button,CssBaseline, Box, Typography, 
+  Container, Link } from '@mui/material';
 import { useEffect, useState, useContext, useReducer } from 'react';
 import axios from 'axios';
 import DebtPages from '../components/DebtPages';
-import { DebtContext } from '../App';
-import { PageTypeContext } from '../App'
-import { SearchContext } from '../App'
+import { DebtContext } from '../context/DebtContext';
+import { PageTypeContext } from '../context/PageTypeContext'
+import { SearchContext } from '../context/SearchContext'
 // import useLogic from '../hooks/useLogic';
 import { useNavigate } from "react-router-dom";
 import HomeMapComponent from '../components/HomeMapComponent';
@@ -28,17 +25,6 @@ function Copyright() {
     </Typography>
   );
 }
-
-
-// const cards = [response];
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#4A8E51'
-    }
-  },
-});
 
 export default function debtHome() {
   const { setPageType } = useContext(PageTypeContext);
@@ -113,7 +99,7 @@ export default function debtHome() {
 
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <FilterComponent paid={isPaid} response={filter} currentUser={currentUser}/>
       <CssBaseline />
       <main>
@@ -143,6 +129,6 @@ export default function debtHome() {
         <Copyright />
       </Box>
       {/* End footer */}
-    </ThemeProvider>
+      </>
   );
 }

@@ -7,7 +7,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 // import PlantPages from '../DebtPages';
-import { PageTypeContext, UsersContext, DebtContext } from '../App'
+import { PageTypeContext } from '../context/PageTypeContext'
+import { UsersContext } from '../context/UserContext';
+import { DebtContext } from '../context/DebtContext';
 import { useNavigate } from "react-router-dom";
 
 function Copyright() {

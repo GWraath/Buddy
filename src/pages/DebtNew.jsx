@@ -6,7 +6,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useNavigate } from "react-router-dom";
-import { UsersContext } from '../App'
+import { UsersContext } from '../context/UserContext';
 
 export const DebtNew = () => {
     // const [transactions, getTransactions] = useState([]);

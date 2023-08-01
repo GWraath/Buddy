@@ -2,14 +2,12 @@ import React from 'react'
 import axios from 'axios'
 import { useState, useEffect, useContext } from 'react'
 import {TextField, Button} from '@mui/material';
-import {DebtContext} from './App'
-import {PageTypeContext} from './App'
-import {UsersContext} from './App'
-import {SearchContext} from './App'
+// import {DebtContext} from './App'
+// import {PageTypeContext} from './App'
+// import {UsersContext} from './App'
+// import {SearchContext} from './App'
 import SearchIcon from '@mui/icons-material/Search';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
 
 export default function DebtSearch(props) {
   let [textField, setTextField] = useState('')
@@ -18,15 +16,6 @@ export default function DebtSearch(props) {
   const {pageType} = useContext(PageTypeContext);
   const {query, setQuery} = useContext(SearchContext);
 
-  //sets the theme
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: '#4A8E51'
-      }
-    },
-  }
-  );
   //gets debts is page is debt. gets users if page is user.
   useEffect(()=> {
     setTextField('')
@@ -56,8 +45,6 @@ export default function DebtSearch(props) {
     }
   }
   return (
-    <ThemeProvider theme={theme}>
       <div><TextField InputLabelProps={{style: { color: '#4A8E51', borderColor: '#4A8E51'}}}  label="search" variant='filled' type="text" value={textField} onChange={(e)=>setTextField(e.target.value)}/><Button id="searchButton" onClick={()=>setTheQuery()}>{textField?<SearchIcon sx={{ mr: 2 }} />:<RefreshIcon sx={{ mr: 2 }} />}</Button></div>
-    </ThemeProvider>
   )
 }
