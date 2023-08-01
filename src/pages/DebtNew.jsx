@@ -44,9 +44,14 @@ export const DebtNew = () => {
     }
 
     const handleDateChange = (date) => {
+        const year = date.$y
+        const month = date.$M
+        const day = date.$D
         console.log(`${date.$D}/${date.$M}/${date.$y}`)
-        const dDate = `${date.$D}/${date.$M}/${date.$y}`
-        setDueDate(dDate)
+        const dDate = `${date.$y}/${date.$M}${date.$D} 00:00:00`
+        const nDate = new Date(year,month,day)
+        console.log(nDate)
+        setDueDate(nDate)
       };
 
 
@@ -61,8 +66,8 @@ export const DebtNew = () => {
 
     //adds a transaction
     const transAdd = (sum) => {
-        console.log(total)
-        const newTrans = { 'userID': userId, 'amount': amount, 'total': sum, 'paid': false }
+        console.log(dueDate)
+        const newTrans = { 'userID': userId, 'amount': amount, 'duedate': dueDate ,'total': sum, 'paid': false }
         const axTrans = `http://localhost:8063/api/debts/create`
         // const axUsers = `http://localhost:8063/api/users/put/${userId}`
         console.log(newTrans)
@@ -89,7 +94,8 @@ export const DebtNew = () => {
                 <div><TextField type='number' onChange={e => setAmount(e.target.value)} label="Custom Amount"></TextField></div><br></br>
                 {/* Due on: <br></br> */}
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker label={"Due date"} value={dueDate} onChange={handleDateChange} renderInput={(params) => <input {...params}/>} format='DD/MM/YYYY'/>
+                    <DatePicker label={"Due date"} value={dueDate} onChange={handleDateChange} renderInput={(params) => <input {...params}/>} format='YYYY-MM-DD'/>
+                    {/* <DatePicker label={"Due date"} value={dueDate} onChange={e => setDueDate(e.target.value)} renderInput={(params) => <input {...params}/>} format='DD-MM-YYYY'/> */}
                 </LocalizationProvider><br></br>
                 <Button onClick={addToTotal}>Add</Button>
             </form>

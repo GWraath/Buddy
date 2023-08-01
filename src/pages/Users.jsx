@@ -25,18 +25,6 @@ function Copyright() {
   );
 }
 
-
-// const cards = [response];
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#4A8E51'
-    }
-  },
-}
-);
-
 export default function Users() {
   const { setPageType } = useContext(PageTypeContext);
   const { users, setUsers } = useContext(UsersContext)
@@ -80,7 +68,7 @@ export default function Users() {
     const userAmounts = debts.map(({ userID, amount }) => ({ userID, amount }))
     // const matchAmounts = userAmounts.filter(usr=> usr.userID)
     const arrayOfArrays = []
-    for (let i = 2; i < users.length+1; i++) {
+    for (let i = 2; i < users.length + 1; i++) {
       arrayOfArrays.push(userAmounts.filter(usr => usr.userID === i))
     }
     const filteredArray = arrayOfArrays.map(({ amount }) => ({ amount }))
@@ -105,7 +93,7 @@ export default function Users() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <CssBaseline />
       <main>
         <Container sx={{ py: 8 }} maxWidth="md">
@@ -171,6 +159,6 @@ export default function Users() {
         <Copyright />
       </Box>
       {/* End footer */}
-    </ThemeProvider>
+    </>
   );
 }

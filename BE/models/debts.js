@@ -26,6 +26,9 @@ Debts.init({
     //         indexes: [{ unique: true }],
     //     }
     // },
+    duedate: {
+        type: DataTypes.DATE, allowNull: true, required: false
+    },
     total: {
         type: DataTypes.INTEGER, allowNull: false, required: false
     },

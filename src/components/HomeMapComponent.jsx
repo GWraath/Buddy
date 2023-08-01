@@ -48,8 +48,12 @@ export default function HomeMapComponent(props) {
                                     ${debt.amount}
                                 </Typography>
                                 <Typography>
-                                    Verified on: <br></br>
+                                    Created on: <br></br>
                                     {debt.createdAt.slice(0, 10)}<br></br>
+                                </Typography>
+                                <Typography>
+                                    Due on: <br></br>
+                                    {debt.duedate.slice(0, 10)}<br></br>
                                 </Typography>
                                 <Typography>
                                     {debt.createdAt.slice(12, 19)}
