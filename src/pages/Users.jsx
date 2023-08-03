@@ -105,11 +105,11 @@ export default function Users() {
             color="text.primary"
             gutterBottom
           >
-            {currentUser ? <Button variant='outlined' size="small" href={"/usernew/"}>Add a user</Button> : null}
+            {currentUser && currentUser.UserAdmin ? <Button variant='outlined' size="small" href={"/usernew/"}>Add a user</Button> : null}
           </Typography>
           <Grid container spacing={4}>
             {users.map((user, index) => (
-              <Grid item key={index} xs={12} sm={6} md={4}>
+              <Grid item key={index} xs={12} sm={6} md={4} lg={4}>
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
                 >

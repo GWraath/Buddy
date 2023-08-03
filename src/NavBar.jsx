@@ -4,8 +4,6 @@ import { AppBar, Toolbar, Typography, Button } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 import Search from './Search';
-import ConditionalComponent from './experimental/ConditionalComponent';
-import HeaderComponent from './components/HeaderComponent';
 
 
 
@@ -37,7 +35,6 @@ const Navbar = () => {
           {currentUser && currentUser.UserAdmin && doISearch ? <Search id="link" /> : null}
         </Typography>
       </AppBar>
-      <HeaderComponent />
     </>
   )
   window.reload

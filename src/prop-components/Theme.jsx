@@ -41,7 +41,7 @@ export default function Theme(props) {
       {/* Footer */}
       <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
         <Typography variant="h6" align="center" gutterBottom>
-          Footer
+          Buddy
         </Typography>
         <Typography
           variant="subtitle1"
@@ -49,7 +49,7 @@ export default function Theme(props) {
           color="text.secondary"
           component="p"
         >
-          Something here to give the footer a purpose!
+          All rights reserved.
         </Typography>
       </Box>
       {/* End footer */}

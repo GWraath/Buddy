@@ -68,7 +68,6 @@ export default function debtHome() {
     const filteredArray = transactions.filter((transaction) => transaction.paid === false)
     const amountArray = filteredArray.map(({ amount }) => ({ amount }))
     const sum = amountArray.reduce((acc, curr) => acc + curr.amount, 0);
-    console.log(sum)
     setTotal(sum)
   }
 

@@ -25,8 +25,9 @@ export const DebtNew = () => {
     }
     doNotProceed()
 
-    const getInfo = () => {
-        axios.get(`http://localhost:8063/api/debts/userdebts/${userId}`)
+    const getInfo = (id) => {
+        setUserId(id)
+        axios.get(`http://localhost:8063/api/debts/userdebts/${id}`)
             .then(response => {
                 console.log(response);
                 getTotal(response.data.data)
@@ -43,12 +44,11 @@ export const DebtNew = () => {
     }
 
     const handleDateChange = (date) => {
-        const year = date.$y
+        const year = date.$y 
         const month = date.$M
         const day = date.$D
         console.log(`${date.$D}/${date.$M}/${date.$y}`)
         const nDate = new Date(year,month,day)
-        console.log(nDate)
         setDueDate(nDate)
       };
 
@@ -82,10 +82,8 @@ export const DebtNew = () => {
         <div className="plantInfo">
             Add a transaction
             <form>
-                <br></br><div><TextField type='text' onChange={(e) =>{ setUserId(e.target.value); getInfo()}} label="User ID"></TextField></div>
-
-                Total owed: {total} <br></br><Button onClick={getInfo}>Get Total</Button><br></br>
-
+                {/* <br></br><div><TextField type='text' onChange={(e) =>{ setUserId(e.target.value); setTimeout(getInfo(), 1000)}} label="User ID"></TextField></div> */}
+                <br></br><div><TextField type='text' onChange={(e) =>{getInfo(e.target.value)}} label="User ID"></TextField></div>
                 <Button onClick={() => setAmount(20)}>20</Button><br></br>
                 <Button onClick={() => setAmount(50)}>50</Button><br></br>
                 <Button onClick={() => setAmount(120)}>120</Button>
