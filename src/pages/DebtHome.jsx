@@ -100,7 +100,7 @@ export default function debtHome() {
 
   return (
     <>
-      <FilterComponent paid={isPaid} response={filter} currentUser={currentUser}/>
+      {/* <FilterComponent paid={isPaid} response={filter} currentUser={currentUser}/> */}
       <CssBaseline />
       <main>
         <Container sx={{ py: 8 }} maxWidth="md">

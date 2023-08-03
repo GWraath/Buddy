@@ -6,6 +6,7 @@ import {
 
 import axios from 'axios';
 import OverdueComponent from './OverdueComponent';
+import PaidComponent from './PaidComponent';
 
 export default function HomeMapComponent(props) {
 
@@ -48,18 +49,7 @@ export default function HomeMapComponent(props) {
                                     Verified on: <br></br>
                                     {debt.createdAt.slice(0, 10)}<br></br>
                                 </Typography>
-                                {props.paid==true ? null :<OverdueComponent debt={debt}/>}
-                                <Typography>
-                                    Paid on: <br></br>
-                                    {debt.createdAt !== debt.updatedAt ?
-                                        debt.updatedAt.slice(0, 10)
-                                        : null}
-                                </Typography>
-                                <Typography>
-                                    {debt.createdAt !== debt.updatedAt ?
-                                        debt.updatedAt.slice(12, 19)
-                                        : null}
-                                </Typography>
+                                {props.paid==true ? <PaidComponent debt={debt}/>:<OverdueComponent debt={debt}/>}
                             </CardContent>
                             <CardActions>
                                 {props.currentUser && props.currentUser.UserAdmin ? <Button size="small" onClick={() => { debtPaid(debt.id) }}>Paid</Button> : null}
