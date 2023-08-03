@@ -118,7 +118,7 @@ export default function debtHome() {
             {currentUser && currentUser.UserAdmin && isPaid || query !== '' ? <Button variant="outlined" id="buttonWhite" size="small" onClick={() => filterUnpaid(debts)}>Unpaid</Button> : <Button variant="outlined" id="buttonWhite" size="small" onClick={filterPaid}>Paid</Button>}
             <div><Button variant="outlined" id="buttonWhite" size="small"><RefreshIcon onClick={() => window.location.reload()} /></Button></div>
           </Typography>
-          <HomeMapComponent debts={filter} currentUser={currentUser} />
+          <HomeMapComponent debts={filter} currentUser={currentUser} paid={isPaid}/>
         </Container>
       </main>
       {/* Footer */}

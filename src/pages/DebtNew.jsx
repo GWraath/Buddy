@@ -93,7 +93,6 @@ export const DebtNew = () => {
                 {/* Due on: <br></br> */}
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker label={"Due date"} value={dueDate} onChange={handleDateChange} renderInput={(params) => <input {...params}/>} format='YYYY-MM-DD'/>
-                    {/* <DatePicker label={"Due date"} value={dueDate} onChange={e => setDueDate(e.target.value)} renderInput={(params) => <input {...params}/>} format='DD-MM-YYYY'/> */}
                 </LocalizationProvider><br></br>
                 <Button onClick={addToTotal}>Add</Button>
             </form>

@@ -9,7 +9,7 @@ import NewLogin from '../pages/NewLogin';
 import DebtHome from '../pages/DebtHome'
 import PNF from '../pages/PNF';
 import Theme from '../prop-components/Theme';
-import {UserInfoEdit} from '../pages/UserTotalEdit';
+import { UserInfoEdit } from '../pages/UserTotalEdit';
 
 
 export default function AppRoutes() {
