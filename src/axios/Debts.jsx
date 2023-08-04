@@ -3,7 +3,7 @@ import { Button,CssBaseline, Box, Typography,
   Container, Link } from '@mui/material';
 import { useEffect, useState, useContext, useReducer } from 'react';
 import axios from 'axios';
-import DebtPages from '../components/DebtPages';
+import DebtPages from '../components/transactions/DebtPages';
 import { DebtContext } from '../context/DebtContext';
 import { PageTypeContext } from '../context/PageTypeContext'
 import { SearchContext } from '../context/SearchContext'
@@ -11,7 +11,7 @@ import { SearchContext } from '../context/SearchContext'
 import { useNavigate } from "react-router-dom";
 import HomeMapComponent from '../components/HomeMapComponent';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import FilterComponent from '../components/FilterComponent';
+import FilterComponent from '../components/transactions/FilterComponent';
 
 export default function debtHome() {
   const { setPageType } = useContext(PageTypeContext);

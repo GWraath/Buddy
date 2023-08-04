@@ -3,15 +3,15 @@ import { Button,CssBaseline, Box, Typography,
   Container, Link } from '@mui/material';
 import { useEffect, useState, useContext, useReducer } from 'react';
 import axios from 'axios';
-import DebtPages from '../components/DebtPages';
+import DebtPages from '../components/transactions/DebtPages';
 import { DebtContext } from '../context/DebtContext';
 import { PageTypeContext } from '../context/PageTypeContext'
 import { SearchContext } from '../context/SearchContext'
 // import useLogic from '../hooks/useLogic';
 import { useNavigate } from "react-router-dom";
-import HomeMapComponent from '../components/HomeMapComponent';
+import HomeMapComponent from '../components/transactions/HomeMapComponent';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import FilterComponent from '../components/FilterComponent';
+import FilterComponent from '../components/transactions/FilterComponent';
 
 function Copyright() {
   return (

@@ -3,12 +3,12 @@ import { Button,CssBaseline, Box, Typography,
   Container, Link } from '@mui/material';
 import { useEffect, useState, useContext, useReducer } from 'react';
 import axios from 'axios';
-import DebtPages from '../components/DebtPages';
-import Copyright from './Copyright';
-import { PageTypeContext } from '../context/PageTypeContext'
-import { SearchContext } from '../context/SearchContext'
+import DebtPages from './DebtPages';
+import Copyright from '../Copyright';
+import { PageTypeContext } from '../../context/PageTypeContext'
+import { SearchContext } from '../../context/SearchContext'
 import { useNavigate } from "react-router-dom";
-import HomeMapComponent from '../components/HomeMapComponent';
+import HomeMapComponent from './HomeMapComponent';
 import RefreshIcon from '@mui/icons-material/Refresh';
 
 export default function FilterComponent(props) {
