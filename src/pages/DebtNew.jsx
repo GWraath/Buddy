@@ -7,6 +7,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useNavigate } from "react-router-dom";
 import { UsersContext } from '../context/UserContext';
+import { Troubleshoot } from '@mui/icons-material';
 
 export const DebtNew = () => {
     // const [transactions, getTransactions] = useState([]);
@@ -40,6 +41,7 @@ export const DebtNew = () => {
         const amountArray = filteredArray.map(({ amount }) => ({ amount }))
         const sum = amountArray.reduce((acc, curr) => acc + curr.amount, 0);
         setTotal(sum)
+        console.log(sum)
     }
 
     const handleDateChange = (date) => {
@@ -87,11 +89,10 @@ export const DebtNew = () => {
                 <Button onClick={() => setAmount(50)}>50</Button><br></br>
                 <Button onClick={() => setAmount(120)}>120</Button>
                 <div><TextField type='number' onChange={e => setAmount(e.target.value)} label="Custom Amount"></TextField></div><br></br>
-                {/* Due on: <br></br> */}
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker label={"Due date"} value={dueDate} onChange={handleDateChange} renderInput={(params) => <input {...params}/>} format='YYYY-MM-DD'/>
+                    <DatePicker required label={"Due date"} value={dueDate} onChange={handleDateChange} renderInput={(params) => <input {...params}/>} format='YYYY-MM-DD'/>
                 </LocalizationProvider><br></br>
-                <Button onClick={addToTotal}>Add</Button>
+                <Button onClick={dueDate!=null?addToTotal:null}>Add</Button>
             </form>
         </div>
     )

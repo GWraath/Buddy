@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 
 import {
     Button, Card, CardActions, CardContent, Grid, Typography
@@ -7,42 +7,9 @@ import {
 import axios from 'axios';
 import OverdueComponent from './OverdueComponent';
 import PaidComponent from './PaidComponent';
+import PaidDeleteComponent from './PaidDeleteComponent';
 
 export default function HomeMapComponent(props) {
-    const [calc, setCalc] = useState();
-
-      //delete a debt
-  const debtDelete = (debtid, userid) => {
-    const axdebts = `http://localhost:8063/api/debts/delete/${debtid}`
-    axios.delete(axdebts)
-      .then(response => { console.log(response); })
-      .catch(error => { console.log(error) })
-  }
-
-  //pay a debt
-  const debtPaid = (debtid, userid, amount) => {
-    console.log(userid)
-    const pay = { 'paid': true }
-    const axdebts = `http://localhost:8063/api/debts/put/${debtid}`
-    const axGetUsers = `http://localhost:8063/api/users/${userid}`
-    axios.put(axdebts, pay)
-      .then(response => { console.log(response.data.data);})
-      .catch(error => { console.log(error) })
-    axios.get(axGetUsers)
-      .then(response => {
-        updateBalance(response.data.data, amount, userid)
-    })
-      .catch(error => { console.log(error) })
-  }
-
-  const updateBalance = (owed, amount, userid) => {
-    console.log(owed)
-    const total = owed - amount
-    const axPutUsers = `http://localhost:8063/api/users/put/${userid}`
-    // axios.put(axPutUsers, total)
-    // .then(response => { console.log(response.data.data);})
-    // .catch(error => { console.log(error) })
-  }
     return (
         <div>
             <Grid container spacing={4}>
@@ -63,11 +30,10 @@ export default function HomeMapComponent(props) {
                                     Verified on: <br></br>
                                     {debt.createdAt.slice(0, 10)}<br></br>
                                 </Typography>
-                                {props.paid==true ? <PaidComponent debt={debt}/>:<OverdueComponent debt={debt}/>}
+                                {props.paid == true ? <PaidComponent debt={debt} /> : <OverdueComponent debt={debt} />}
                             </CardContent>
                             <CardActions>
-                                {props.currentUser && props.currentUser.UserAdmin ? <Button size="small" onClick={() => { debtPaid(debt.id, debt.userID, debt.amount) }}>Paid</Button> : null}
-                                {props.currentUser && props.currentUser.UserAdmin ? <Button size="small" onClick={() => { debtDelete(debt.id, debt.userID) }}>Delete</Button> : null}
+                                 {props.currentUser && props.currentUser.UserAdmin ?<PaidDeleteComponent debt={debt} currentUser={props.currentUser} /> : null }
                             </CardActions>
                         </Card>
                     </Grid>
