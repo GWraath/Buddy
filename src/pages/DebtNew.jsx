@@ -8,12 +8,15 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useNavigate } from "react-router-dom";
 import { UsersContext } from '../context/UserContext';
 import { Troubleshoot } from '@mui/icons-material';
+import Axios from '../components/Axios';
 
 export const DebtNew = () => {
-    // const [transactions, getTransactions] = useState([]);
     const { users } = useContext(UsersContext)
     const [total, setTotal] = useState(0);
     const [dueDate, setDueDate] = useState(null);
+    const [amount, setAmount] = useState(0)
+    // const [newTrans, setNewTrans] = useState(0)
+    const [userId, setUserId] = useState('')
     const currentUserString = localStorage.getItem('currentUser');
     const currentUser = JSON.parse(currentUserString);
     let navigate = useNavigate();
@@ -25,6 +28,8 @@ export const DebtNew = () => {
         }
     }
     doNotProceed()
+
+    // {newTrans? <Axios object={newTrans} call={'post'} type={'debts'} id={'3'}/> : null}
 
     const getInfo = (id) => {
         setUserId(id)
@@ -45,17 +50,11 @@ export const DebtNew = () => {
     }
 
     const handleDateChange = (date) => {
-        const year = date.$y 
-        const month = date.$M
-        const day = date.$D
-        console.log(`${date.$D}/${date.$M}/${date.$y}`)
-        const nDate = new Date(year,month,day)
-        setDueDate(nDate)
-      };
-
-
-    const [amount, setAmount] = useState('')
-    const [userId, setUserId] = useState('')
+        // Convert the input date object to a JavaScript Date object
+        const selectedDate = new Date(date);
+        // Set the selected date in the component's state
+        setDueDate(selectedDate);
+    };
 
     const addToTotal = () => {
         const sum = total + amount
@@ -66,7 +65,10 @@ export const DebtNew = () => {
 
     //adds a transaction
     const transAdd = (sum) => {
-        const newTrans = { 'userID': userId, 'amount': amount, 'duedate': dueDate ,'total': sum, 'paid': false }
+        // setNewTrans({ 'userID': userId, 'amount': amount, 'duedate': dueDate ,'total': sum, 'paid': false }) //for Axios component when come back to it
+        const newTrans = { 'userID': userId, 'amount': amount, 'duedate': dueDate, 'total': sum, 'paid': false }
+        const props = { 'call': 'post', 'type': 'debts', 'object': newTrans }
+        // navigate('/axios', {state: props}) //pass in object by state and useLocation
         const axTrans = `http://localhost:8063/api/debts/create`
         const axUsers = `http://localhost:8063/api/users/put/${userId}`
         axios.post(axTrans, newTrans)
@@ -82,17 +84,17 @@ export const DebtNew = () => {
         <div className="plantInfo">
             Add a transaction
             <form>
-                {/* <br></br><div><TextField type='text' onChange={(e) =>{ setUserId(e.target.value); setTimeout(getInfo(), 1000)}} label="User ID"></TextField></div> */}
-                <br></br><div><TextField type='text' onChange={(e) =>{getInfo(e.target.value)}} label="User ID"></TextField></div>
+                <br></br><div><TextField type='text' onChange={(e) => { getInfo(e.target.value) }} label="User ID"></TextField></div>
                 <Button onClick={() => setAmount(20)}>20</Button><br></br>
                 <Button onClick={() => setAmount(50)}>50</Button><br></br>
                 <Button onClick={() => setAmount(120)}>120</Button>
                 <div><TextField type='number' onChange={e => setAmount(e.target.value)} label="Custom Amount"></TextField></div><br></br>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker required label={"Due date"} value={dueDate} onChange={handleDateChange} renderInput={(params) => <input {...params}/>} format='YYYY-MM-DD'/>
+                    <DatePicker required label={"Due date"} value={dueDate} onChange={handleDateChange} renderInput={(params) => <input {...params} />} format='YYYY-MM-DD' />
                 </LocalizationProvider><br></br>
-                <Button onClick={dueDate!=null?addToTotal:null}>Add</Button>
+                <Button onClick={dueDate != null ? addToTotal : null}>Add</Button>
             </form>
+            {/* {newTrans?<Axios object={newTrans} call={'post'} type={'debts'} id={'3'}/>:null} */}
         </div>
     )
 }

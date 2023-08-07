@@ -15,7 +15,8 @@ export default function OverdueComponent({ debt }) {
     const dueDate = new Date(
         getDate.slice(0, 4),
         getDate.slice(5, 7) - 1,
-        getDate.slice(8, 10))
+        getDate.slice(8, 10)
+        )
 
     if (currentDateWithoutTime > dueDate) {
         return (

@@ -3,7 +3,7 @@ import { Button,CssBaseline, Box, Typography,
   Container, Link } from '@mui/material';
 import { useEffect, useState, useContext, useReducer } from 'react';
 import axios from 'axios';
-import DebtPages from './DebtPages';
+import DebtPages from '../DebtPages';
 import Copyright from '../Copyright';
 import { PageTypeContext } from '../../context/PageTypeContext'
 import { SearchContext } from '../../context/SearchContext'

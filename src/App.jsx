@@ -12,7 +12,7 @@ import { FunctionHolder } from './context/FunctionContext';
 import Axios from './components/Axios';
 
 function App() {
-  const myObject = {'amount': 120, 'total': 120};
+  // const myObject = { 'userID': 3, 'amount': 20, 'duedate': 'Wed Aug 30 2023 00:00:00 GMT+1200 (New Zealand Standard Time)' ,'total': 0, 'paid': false };
   return (
       <CurrentUserHolder>
         <PageTypeHolder>
@@ -23,7 +23,7 @@ function App() {
                   <FunctionHolder>
                     <Navbar />
                     <AppRoutes />
-                    {/* <Axios object={myObject} call={'get'} type={'debts'} id={'3'}/> */}
+                    {/* <Axios object={myObject} call={'post'} type={'debts'} id={'3'}/> */}
                   </FunctionHolder>
                 </VariableHolder>
               </UserContextHolder>

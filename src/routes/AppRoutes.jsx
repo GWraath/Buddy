@@ -10,6 +10,7 @@ import DebtHome from '../pages/DebtHome'
 import PNF from '../pages/PNF';
 import Theme from '../prop-components/Theme';
 import { UserInfoEdit } from '../pages/UserTotalEdit';
+import Axios from '../components/Axios';
 
 
 export default function AppRoutes() {
@@ -22,6 +23,7 @@ export default function AppRoutes() {
                 <Route path='/userinfo' >
                     <Route path=':id' element={<Theme component={<UserInfoEdit />} />} />
                 </Route>
+                <Route path='/axios' element={<Axios />} />
                 <Route path='/' element={<Theme component={<DebtHome />} />} />
                 <Route path='/profile' element={<Theme component={<Profile/>} />} />
                 <Route path='/pna' element={<Theme component={<PageNotAllowed />} />} />
