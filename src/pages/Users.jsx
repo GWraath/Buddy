@@ -78,8 +78,6 @@ export default function Users() {
     // const sum = arrayOfArrays[0].reduce((acc, cur) => acc + cur.value, 0);
     // arrayOfArrays.map()
     // const matchTrans = userAmounts.filter(usr => usr.userID)
-    console.log(arrayOfArrays[1])
-    console.log(filteredArray)
   })
 
   // console.log(debts)

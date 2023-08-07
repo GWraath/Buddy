@@ -69,7 +69,6 @@ export const DebtNew = () => {
         const newTrans = { 'userID': userId, 'amount': amount, 'duedate': dueDate ,'total': sum, 'paid': false }
         const axTrans = `http://localhost:8063/api/debts/create`
         const axUsers = `http://localhost:8063/api/users/put/${userId}`
-        console.log(newTrans)
         axios.post(axTrans, newTrans)
             .then(response => { console.log(response.data); })
             .catch(error => { console.log(error) });

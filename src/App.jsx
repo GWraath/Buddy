@@ -23,7 +23,7 @@ function App() {
                   <FunctionHolder>
                     <Navbar />
                     <AppRoutes />
-                    <Axios object={myObject} call={'get'} type={'debts'} id={'3'}/>
+                    {/* <Axios object={myObject} call={'get'} type={'debts'} id={'3'}/> */}
                   </FunctionHolder>
                 </VariableHolder>
               </UserContextHolder>

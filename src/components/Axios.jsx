@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios'
 
 export default function Axios(props) {
-
 if (props.call==='get') {
     if (props.id==undefined) { 
         axios.get(`http://localhost:8063/api/${props.type}/`)
