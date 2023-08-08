@@ -1,5 +1,10 @@
 "use strict";
 const Models = require("../models");
+// const redis = require("redis");
+// const redisClient = redis.createClient({
+//   host: process.env.REDIS_HOST || "127.0.0.1",
+//   port: process.env.REDIS_PORT || 6379,
+// });
 
 const getDebts = (req, res) => {
     // const limit = JSON.parse(req.query.limit)
@@ -13,6 +18,33 @@ const getDebts = (req, res) => {
         throw err
     })
 }
+
+// const getDebts = (req, res) => {
+//     // Check if data exists in the cache
+//     redisClient.get("debts", (err, cachedData) => {
+//       if (err) {
+//         console.error("Error retrieving cached data:", err);
+//       }
+  
+//       if (cachedData !== null) {
+//         // Cached data exists, send cached data
+//         const parsedData = JSON.parse(cachedData);
+//         res.json(parsedData);
+//       } else {
+//         // Data not found in cache, fetch from the database
+//         Models.Debts.findAll().then((data) => {
+//           // Store data in the cache for 1 hour
+//           redisClient.setex("debts", 3600, JSON.stringify(data));
+//           res.json(data);
+//         }).catch(err => {
+//           console.error("Error fetching data from database:", err);
+//           res.status(500).json({ error: "Internal server error" });
+//         });
+//       }
+//     });
+//   };
+  
+  
 
 const getDebtsByID = (req, res) => {
     Models.Debts.findAll({ where: { id: req.params.id } }).then(function (data) {
@@ -37,6 +69,17 @@ const createDebts = (data, res) => {
         throw err
     })
 }
+
+// const createDebts = (data, res) => {
+//     Models.Debts.create(data).then((data) => {
+//       // Clear the "debts" cache
+//       client.del("debts");
+//       res.send({ result: 200, data: data });
+//     }).catch(err => {
+//       throw err;
+//     });
+//   };
+  
 
 const updateDebts = (req, res) => {
     Models.Debts.update(req.body, {

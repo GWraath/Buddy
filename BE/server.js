@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
+const redis = require("redis"); // Require the redis package
 
 
 var corsOptions = {
@@ -9,6 +10,11 @@ var corsOptions = {
 
 const Controllers = require('./controllers')
 const app = express();
+
+const client = redis.createClient({
+    host: process.env.REDIS_HOST || "127.0.0.1", // Redis server host
+    port: process.env.REDIS_PORT || 6379,       // Redis server port
+  });
 
 app.use(cors(corsOptions));
 
