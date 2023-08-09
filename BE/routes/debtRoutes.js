@@ -17,12 +17,10 @@ router.get('/userdebts/:userid', (req, res) => {
 })
 
 router.post('/create', (req, res) => {
-    // console.log(req.body)
     Controllers.createDebts(req.body, res)
 })
 
 router.put('/put/:id', (req, res) => {
-    console.log('test')
     Controllers.updateDebts(req, res)
 })
 
