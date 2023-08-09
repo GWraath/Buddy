@@ -7,6 +7,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useNavigate } from "react-router-dom";
 import { UsersContext } from '../context/UserContext';
+import dayjs from 'dayjs'; // Import Day.js
 import { Troubleshoot } from '@mui/icons-material';
 import Axios from '../components/Axios';
 
@@ -48,13 +49,13 @@ export const DebtNew = () => {
         setTotal(sum)
         console.log(sum)
     }
-
+    //change and set the date to a usable format
     const handleDateChange = (date) => {
-        // Convert the input date object to a JavaScript Date object
-        const selectedDate = new Date(date);
-        // Set the selected date in the component's state
+        //define the date
+        const selectedDate = new Date(date)
+        //set the date
         setDueDate(selectedDate);
-    };
+      };
 
     const addToTotal = () => {
         const sum = total + amount
@@ -65,8 +66,11 @@ export const DebtNew = () => {
 
     //adds a transaction
     const transAdd = (sum) => {
+        const nextDay = dayjs(dueDate).add(1, 'day');
+        console.log(nextDay)
         // setNewTrans({ 'userID': userId, 'amount': amount, 'duedate': dueDate ,'total': sum, 'paid': false }) //for Axios component when come back to it
         const newTrans = { 'userID': userId, 'amount': amount, 'duedate': dueDate, 'total': sum, 'paid': false }
+        console.log(newTrans)
         const props = { 'call': 'post', 'type': 'debts', 'object': newTrans }
         // navigate('/axios', {state: props}) //pass in object by state and useLocation
         const axTrans = `http://localhost:8063/api/debts/create`
@@ -91,6 +95,7 @@ export const DebtNew = () => {
                 <div><TextField type='number' onChange={e => setAmount(e.target.value)} label="Custom Amount"></TextField></div><br></br>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker required label={"Due date"} value={dueDate} onChange={handleDateChange} renderInput={(params) => <input {...params} />} format='YYYY-MM-DD' />
+                    {/* <DatePicker required label={"Due date"} value={dueDate} onChange={handleDateChange} renderInput={(params) => <input {...params} />} format='DD-MM-YYYY' minDate={new Date()} maxDate={new Date('YYYY-MM-DD')} /> */}
                 </LocalizationProvider><br></br>
                 <Button onClick={dueDate != null ? addToTotal : null}>Add</Button>
             </form>
