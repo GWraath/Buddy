@@ -20,20 +20,21 @@ export default function FilterComponent(props) {
 
     const debts = props.debts
     const currentUser = props.currentUser
+    console.log(debts)
     
     const filterPaid = () => {
         const filteredArray = debts.filter((transaction) => transaction.paid === true)
         console.log(filteredArray)
         setFilter(filteredArray)
-        // getTotal(filteredArray)
+        getTotal(filteredArray)
         setIsPaid(true)
       }
     
-      const filterUnpaid = () => {
-        const filteredTransaction = debts.filter((transaction) => transaction.paid === false)
+      const filterUnpaid = (reponse) => {
+        const filteredTransaction = reponse.filter((transaction) => transaction.paid === false)
         setFilter(filteredTransaction)
-        // getTotal(response)
-        console.log()
+        getTotal(reponse)
+        console.log(filteredTransaction)
         setIsPaid(false)
       }
 
@@ -44,6 +45,10 @@ export default function FilterComponent(props) {
         console.log(sum)
         setTotal(sum)
       }
+
+      useEffect(() => {
+        filterUnpaid(debts)
+      },[debts])
 
   return (
     <>
@@ -59,10 +64,9 @@ export default function FilterComponent(props) {
             gutterBottom
           >
             Transactions for {currentUser.name}<br></br>
-            Amount owed: ${total}
+            {isPaid? null:<div>Amount owed:{total}</div>}
             {currentUser && currentUser.UserAdmin ? <div><Button variant="outlined" id="buttonWhite" size="small" href={"/debtnew/"}>Add a debt</Button></div> : null}
-            {/* {currentUser && currentUser.UserAdmin && isPaid || query !== '' ? <Button variant="outlined" id="buttonWhite" size="small" onClick={() => filterUnpaid(debts)}>Unpaid</Button> : <Button variant="outlined" id="buttonWhite" size="small" onClick={filterPaid}>Paid</Button>} */}
-            {currentUser && currentUser.UserAdmin && isPaid || query !== '' ? <Button variant="outlined" id="buttonWhite" size="small" onClick={() => setIsPaid(false)}>Unpaid</Button> : <Button variant="outlined" id="buttonWhite" size="small" onClick={() => setIsPaid(true)}>Paid</Button>}
+            {currentUser && currentUser.UserAdmin && isPaid || query !== '' ? <Button variant="outlined" id="buttonWhite" size="small" onClick={() => filterUnpaid(debts)}>Unpaid</Button> : <Button variant="outlined" id="buttonWhite" size="small" onClick={filterPaid}>Paid</Button>}
             <div><Button variant="outlined" id="buttonWhite" size="small"><RefreshIcon onClick={() => window.location.reload()} /></Button></div>
           </Typography>
           <HomeMapComponent debts={filter} currentUser={currentUser} paid={isPaid}/>

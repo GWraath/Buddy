@@ -48,43 +48,19 @@ export default function debtHome() {
       // const axDebts = `http://localhost:8063/api/debts/?limit=${debtsPerPage}&offset=${offset}`
       const axDebts = `http://localhost:8063/api/debts/`
       axios.get(axDebts)
-        .then(response => { getTotal(response.data.data); 
-          filterUnpaid(response.data.data); 
+        .then(response => { 
           // dispatch({ type: 'unpaid', reponse: response.data.data})
+          console.log(response.data.data);
           setDebts(response.data.data) })
         .catch(error => { console.log(error) })
     }
     else {
       const axDebts = `http://localhost:8063/api/debts/userdebts/${currentUser.id}`
       axios.get(axDebts)
-        .then(response => { console.log(response); setDebts(response.data.data); getTotal(response.data.data) })
+        .then(response => { console.log(response); setDebts(response.data.data)})
         .catch(error => { console.log(error) })
     }
-    // query!==''?()=>filterUnpaid(debts):null
   }, [page])
-
-
-  const getTotal = (transactions) => {
-    const filteredArray = transactions.filter((transaction) => transaction.paid === false)
-    const amountArray = filteredArray.map(({ amount }) => ({ amount }))
-    const sum = amountArray.reduce((acc, curr) => acc + curr.amount, 0);
-    setTotal(sum)
-  }
-
-  const filterPaid = () => {
-    const filteredArray = debts.filter((transaction) => transaction.paid === true)
-    setFilter(filteredArray)
-    getTotal(filteredArray)
-    setIsPaid(true)
-  }
-
-  const filterUnpaid = (response) => {
-    const filteredTransaction = response.filter((transaction) => transaction.paid === false)
-    setFilter(filteredTransaction)
-    getTotal(response)
-    console.log()
-    setIsPaid(false)
-  }
   
   //if non user clicks delete, redirect to pna
   const doNotProceed = () => {
@@ -99,25 +75,10 @@ export default function debtHome() {
 
   return (
     <>
-      {/* <FilterComponent paid={isPaid} response={filter} currentUser={currentUser}/> */}
       <CssBaseline />
       <main>
         <Container sx={{ py: 8 }} maxWidth="md">
-          {/* End hero unit */}
-          <Typography
-            component="h1"
-            variant="h6"
-            align="center"
-            color="text.primary"
-            gutterBottom
-          >
-            Transactions for {currentUser.name}<br></br>
-            Amount owed: ${total}
-            {currentUser && currentUser.UserAdmin ? <div><Button variant="outlined" id="buttonWhite" size="small" href={"/debtnew/"}>Add a debt</Button></div> : null}
-            {currentUser && currentUser.UserAdmin && isPaid || query !== '' ? <Button variant="outlined" id="buttonWhite" size="small" onClick={() => filterUnpaid(debts)}>Unpaid</Button> : <Button variant="outlined" id="buttonWhite" size="small" onClick={filterPaid}>Paid</Button>}
-            <div><Button variant="outlined" id="buttonWhite" size="small"><RefreshIcon onClick={() => window.location.reload()} /></Button></div>
-          </Typography>
-          <HomeMapComponent debts={filter} currentUser={currentUser} paid={isPaid}/>
+          <FilterComponent debts={debts} currentUser={currentUser}/>
         </Container>
       </main>
       {/* Footer */}
