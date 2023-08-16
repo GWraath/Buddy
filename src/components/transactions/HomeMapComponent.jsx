@@ -1,10 +1,7 @@
 import React from 'react'
-
 import {
-    Button, Card, CardActions, CardContent, Grid, Typography
+     Card, CardActions, CardContent, Grid, Typography
 } from '@mui/material';
-
-import axios from 'axios';
 import OverdueComponent from './OverdueComponent';
 import PaidComponent from './PaidComponent';
 import PaidDeleteComponent from './PaidDeleteComponent';

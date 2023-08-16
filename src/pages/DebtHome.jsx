@@ -28,7 +28,7 @@ function Copyright() {
 }
 
 export default function debtHome() {
-  const { setPageType } = useContext(PageTypeContext);
+  const { pageType, setPageType } = useContext(PageTypeContext);
   const { debts, setDebts } = useContext(DebtContext);
   const { query } = useContext(SearchContext);
   // const [state, dispatch] = useLogic()

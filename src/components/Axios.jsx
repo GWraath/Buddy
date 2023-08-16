@@ -11,7 +11,6 @@ export default function Axios(props) {
                 axios
                     .get(`http://localhost:8063/api/${props.type}/`)
                     .then(response => {
-                        console.log('1');
                         props.setResponse(response.data.data)
                     })
                     .catch(error => {

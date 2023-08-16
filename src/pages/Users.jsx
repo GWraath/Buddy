@@ -6,11 +6,12 @@ import {
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-// import PlantPages from '../DebtPages';
 import { PageTypeContext } from '../context/PageTypeContext'
 import { UsersContext } from '../context/UserContext';
 import { DebtContext } from '../context/DebtContext';
 import { useNavigate } from "react-router-dom";
+import UserMapComponent from '../components/users/UserMapComponent';
+import DebtPages from '../components/DebtPages';
 
 function Copyright() {
   return (
@@ -64,32 +65,6 @@ export default function Users() {
       .catch(error => { console.log(error) })
   }, [])
 
-  useEffect(() => {
-    const userAmounts = debts.map(({ userID, amount }) => ({ userID, amount }))
-    // const matchAmounts = userAmounts.filter(usr=> usr.userID)
-    const arrayOfArrays = []
-    for (let i = 2; i < users.length + 1; i++) {
-      arrayOfArrays.push(userAmounts.filter(usr => usr.userID === i))
-    }
-    const filteredArray = arrayOfArrays.map(({ amount }) => ({ amount }))
-    // for (let i = 0; i <8; i++){
-
-    // }
-    // const sum = arrayOfArrays[0].reduce((acc, cur) => acc + cur.value, 0);
-    // arrayOfArrays.map()
-    // const matchTrans = userAmounts.filter(usr => usr.userID)
-  })
-
-  // console.log(debts)
-
-  //deletes the user
-  const userDelete = (delUser) => {
-    const axPlants = `http://localhost:8063/api/users/` + delUser
-    axios.delete(axPlants)
-      .then(response => { console.log(response); setDeleted(true) })
-      .catch(error => { console.log(error) })
-  }
-
   return (
     <>
       <CssBaseline />
@@ -105,46 +80,13 @@ export default function Users() {
           >
             {currentUser && currentUser.UserAdmin ? <Button variant='outlined' size="small" href={"/usernew/"}>Add a user</Button> : null}
           </Typography>
-          <Grid container spacing={4}>
-            {users.map((user, index) => (
-              <Grid item key={index} xs={12} sm={6} md={4} lg={4}>
-                <Card
-                  sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-                >
-                  <CardMedia
-                    component="img"
-                    sx={{
-                      // 16:9
-                      pt: '56.25%',
-                    }}
-                    image={'https://cdn-icons-png.flaticon.com/512/1946/1946429.png'}
-                    alt="random"
-                  />
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography gutterBottom variant="h5" component="h2" className='capitalise'>
-                      {user.id}
-                    </Typography>
-                    <Typography gutterBottom variant="h5" component="h2" className='capitalise'>
-                      {user.name}
-                    </Typography>
-                    <Typography>
-                      {user.total}
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small" href={"/userinfo/" + user.id}>View</Button>
-                    <Button size="small" onClick={() => { userDelete(user.id) }}>Delete</Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
+          <UserMapComponent users={users} />
         </Container>
       </main>
       {/* Footer */}
       <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
         <Typography variant="h6" align="center" gutterBottom>
-          {/* <PlantPages pageHandler={setPage} list={userList.length} /> */}
+          <DebtPages pageHandler={setPage} list={users.length} />
         </Typography>
         <Typography
           variant="subtitle1"
