@@ -60,11 +60,6 @@ export default function debtHome() {
           <FilterComponent debts={debts} currentUser={currentUser}/>
         </Container>
       </main>
-      {/* Footer */}
-      <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
-        <Copyright />
-      </Box>
-      {/* End footer */}
       </>
   );
 }

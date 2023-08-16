@@ -10,21 +10,8 @@ import { PageTypeContext } from '../context/PageTypeContext'
 import { UsersContext } from '../context/UserContext';
 import { DebtContext } from '../context/DebtContext';
 import { useNavigate } from "react-router-dom";
-import UserMapComponent from '../components/users/UserMapComponent';
 import DebtPages from '../components/DebtPages';
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import UserComponent from '../components/users/UserComponent';
 
 export default function Users() {
   const { setPageType } = useContext(PageTypeContext);
@@ -71,34 +58,11 @@ export default function Users() {
       <main>
         <Container sx={{ py: 8 }} maxWidth="md">
           {/* End hero unit */}
-          <Typography
-            component="h1"
-            variant="h6"
-            align="center"
-            color="text.primary"
-            gutterBottom
-          >
-            {currentUser && currentUser.UserAdmin ? <Button variant='outlined' size="small" href={"/usernew/"}>Add a user</Button> : null}
-          </Typography>
-          <UserMapComponent users={users} />
+          <UserComponent users={users} currentUser={currentUser}/>
+          
+          {/* <UserMapComponent users={users} /> */}
         </Container>
       </main>
-      {/* Footer */}
-      <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
-        <Typography variant="h6" align="center" gutterBottom>
-          <DebtPages pageHandler={setPage} list={users.length} />
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="text.secondary"
-          component="p"
-        >
-          Choose a page to explore more!
-        </Typography>
-        <Copyright />
-      </Box>
-      {/* End footer */}
     </>
   );
 }

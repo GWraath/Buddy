@@ -37,7 +37,6 @@ const Navbar = () => {
       </AppBar>
     </>
   )
-  window.reload
 }
 
 export default Navbar

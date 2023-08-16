@@ -10,7 +10,7 @@ export default function UserMapComponent(props) {
     <div>
         <Grid container spacing={4}>
             {props.users.map((user, index) => (
-              <Grid item key={index} xs={12} sm={6} md={4} lg={4}>
+              <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
                 >

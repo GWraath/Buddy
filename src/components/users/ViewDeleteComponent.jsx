@@ -1,5 +1,7 @@
 import React from 'react'
 import { Button, CardActions } from '@mui/material'
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import ClearIcon from '@mui/icons-material/Clear';
 
 export default function ViewDeleteComponent(props) {
     //deletes the user
@@ -11,9 +13,9 @@ export default function ViewDeleteComponent(props) {
     }
     return (
         <div>
-            <CardActions>
-                <Button size="small" href={"/userinfo/" + props.user.id}>View</Button>
-                <Button size="small" onClick={() => { userDelete(props.user.id) }}>Delete</Button>
+            <CardActions sx={{ display: 'flex', justifyContent: 'center'}}>
+                <Button size="small" href={"/userinfo/" + props.user.id}><VisibilityIcon/></Button>
+                <Button size="small" onClick={() => { userDelete(props.user.id) }}><ClearIcon/></Button>
             </CardActions>
         </div>
     )

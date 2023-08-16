@@ -3,13 +3,14 @@ import {
   Button, CssBaseline, Box, Typography,
   Container, Link
 } from '@mui/material';
-import { useState} from 'react';
+import { useState } from 'react';
 import DebtPages from '../DebtPages';
+import UserMapComponent from './UserMapComponent';
 
-export default function FilterComponent(props) {
+export default function UserComponent(props) {
   const [page, setPage] = useState(1);
 
-  const debts = props.debts
+  const users = props.users
   const currentUser = props.currentUser
 
   return (
@@ -18,14 +19,21 @@ export default function FilterComponent(props) {
       <main>
         <Container sx={{ py: 8 }} maxWidth="md">
           {/* End hero unit */}
-          <UserMapComponent users={users} currentUser={currentUser}/>
+          <Typography
+            component="h1"
+            variant="h6"
+            align="center"
+            color="text.primary"
+            gutterBottom
+          >
+            {currentUser && currentUser.UserAdmin ? <Button variant='outlined' size="small" href={"/usernew/"}>Add a user</Button> : null}
+          </Typography>
+          <UserMapComponent users={users} currentUser={currentUser} />
         </Container>
       </main>
-      {/* Footer */}
-      <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
-        {/* <Copyright /> */}
-      </Box>
-      {/* End footer */}
+      <Typography variant="h6" align="center" gutterBottom>
+        <DebtPages pageHandler={setPage} list={users.length} />
+      </Typography>
     </>
   )
 }

@@ -21,8 +21,8 @@ export default function Theme(props) {
         <Box
                 sx={{
                     bgcolor: 'background.paper',
-                    pt: 8,
-                    pb: 6,
+                    pt: 0,
+                    pb: 0,
                 }}
                 >
                     <Container maxWidth="sm">
@@ -39,7 +39,7 @@ export default function Theme(props) {
                 </Box>
             </main>
       {/* Footer */}
-      <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
+      <Box sx={{ bgcolor: 'background.paper', p: 0 }} component="footer">
         <Typography variant="h6" align="center" gutterBottom>
           Buddy
         </Typography>
