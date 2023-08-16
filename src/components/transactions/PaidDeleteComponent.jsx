@@ -1,6 +1,8 @@
 import React from 'react'
 import { Button } from '@mui/material'
 import axios from 'axios'
+import ClearIcon from '@mui/icons-material/Clear';
+import DoneIcon from '@mui/icons-material/Done';
 
 export default function PaidDeleteComponent({ debt }, props) {
     const getUsers = (userid, amount) => {
@@ -45,8 +47,8 @@ export default function PaidDeleteComponent({ debt }, props) {
     }
     return (
         <>
-            <Button size="small" onClick={() => { debtPaid(debt.id, debt.userID, debt.amount) }}>Paid</Button>
-            <Button size="small" onClick={() => { debtDelete(debt.id, debt.userID, debt.amount, debt.paid) }}>Delete</Button>
+            <Button size="small" onClick={() => { debtPaid(debt.id, debt.userID, debt.amount) }}><DoneIcon/></Button>
+            <Button size="small" onClick={() => { debtDelete(debt.id, debt.userID, debt.amount, debt.paid) }}><ClearIcon/></Button>
         </>
     )
 }

@@ -2,12 +2,8 @@ import * as React from 'react';
 import { Button,CssBaseline, Box, Typography, 
   Container, Link } from '@mui/material';
 import { useEffect, useState, useContext, useReducer } from 'react';
-import axios from 'axios';
 import DebtPages from '../DebtPages';
-import Copyright from '../Copyright';
-import { PageTypeContext } from '../../context/PageTypeContext'
 import { SearchContext } from '../../context/SearchContext'
-import { useNavigate } from "react-router-dom";
 import HomeMapComponent from './HomeMapComponent';
 import RefreshIcon from '@mui/icons-material/Refresh';
 
@@ -20,7 +16,6 @@ export default function FilterComponent(props) {
 
     const debts = props.debts
     const currentUser = props.currentUser
-    console.log(debts)
     
     const filterPaid = () => {
         const filteredArray = debts.filter((transaction) => transaction.paid === true)
@@ -34,7 +29,6 @@ export default function FilterComponent(props) {
         const filteredTransaction = reponse.filter((transaction) => transaction.paid === false)
         setFilter(filteredTransaction)
         getTotal(reponse)
-        console.log(filteredTransaction)
         setIsPaid(false)
       }
 
@@ -42,7 +36,6 @@ export default function FilterComponent(props) {
         const filteredArray = transactions.filter((transaction) => transaction.paid === false)
         const amountArray = filteredArray.map(({ amount }) => ({ amount }))
         const sum = amountArray.reduce((acc, curr) => acc + curr.amount, 0);
-        console.log(sum)
         setTotal(sum)
       }
 

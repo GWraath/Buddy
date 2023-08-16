@@ -50,7 +50,6 @@ export default function debtHome() {
       axios.get(axDebts)
         .then(response => { 
           // dispatch({ type: 'unpaid', reponse: response.data.data})
-          console.log(response.data.data);
           setDebts(response.data.data) })
         .catch(error => { console.log(error) })
     }
