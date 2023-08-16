@@ -16,6 +16,7 @@ export default function FilterComponent(props) {
 
     const debts = props.debts
     const currentUser = props.currentUser
+    console.log(isPaid)
     
     const filterPaid = () => {
         const filteredArray = debts.filter((transaction) => transaction.paid === true)
@@ -59,7 +60,7 @@ export default function FilterComponent(props) {
             Transactions for {currentUser.name}<br></br>
             {isPaid? null:<div>Amount owed:{total}</div>}
             {currentUser && currentUser.UserAdmin ? <div><Button variant="outlined" id="buttonWhite" size="small" href={"/debtnew/"}>Add a debt</Button></div> : null}
-            {currentUser && currentUser.UserAdmin && isPaid || query !== '' ? <Button variant="outlined" id="buttonWhite" size="small" onClick={() => filterUnpaid(debts)}>Unpaid</Button> : <Button variant="outlined" id="buttonWhite" size="small" onClick={filterPaid}>Paid</Button>}
+            {currentUser && currentUser.UserAdmin && isPaid ? <Button variant="outlined" id="buttonWhite" size="small" onClick={() => filterUnpaid(debts)}>Unpaid</Button> : <Button variant="outlined" id="buttonWhite" size="small" onClick={filterPaid}>Paid</Button>}
             <div><Button variant="outlined" id="buttonWhite" size="small"><RefreshIcon onClick={() => window.location.reload()} /></Button></div>
           </Typography>
           <HomeMapComponent debts={filter} currentUser={currentUser} paid={isPaid}/>
