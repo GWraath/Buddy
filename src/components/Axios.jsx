@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 export default function Axios(props) {
     //   const { state } = useLocation();
     //   const props = state;
-    const navigate = useNavigate();
 
     useEffect(() => {
         if (props.call === 'get') {
@@ -14,6 +12,7 @@ export default function Axios(props) {
                     .get(`http://localhost:8063/api/${props.type}/`)
                     .then(response => {
                         console.log(response.data.data);
+                        props.setResponse(response.data.data)
                     })
                     .catch(error => {
                         console.log(error);
@@ -32,7 +31,8 @@ export default function Axios(props) {
             axios
                 .post(`http://localhost:8063/api/${props.type}/create/`, props.object)
                 .then(response => {
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
+                    props.setResponse(response.data.data)
                 })
                 .catch(error => {
                     console.log(error);
@@ -67,7 +67,7 @@ export default function Axios(props) {
                     });
             }
         }
-    }, [props.call, props.type, props.object]);
-    navigate('/')
+    }, [props.call, props.type, props.object, props.setResponse]);
+
     return null;
 }

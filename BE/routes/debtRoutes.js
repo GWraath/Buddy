@@ -28,6 +28,10 @@ router.delete('/delete/:id', (req, res) => {
     Controllers.deleteDebts(req, res)
 })
 
+router.delete('/userdebts/:userid', (req, res) => {
+    Controllers.deleteDebtsByUserID(req, res);
+})
+
 router.lock('/', (req, res) => {  
     Controllers.lockDebts(req, res);
 })

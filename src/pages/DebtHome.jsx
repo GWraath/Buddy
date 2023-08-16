@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import HomeMapComponent from '../components/transactions/HomeMapComponent';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import FilterComponent from '../components/transactions/FilterComponent';
+import Axios from '../components/Axios';
 
 function Copyright() {
   return (
@@ -31,35 +32,31 @@ export default function debtHome() {
   const { debts, setDebts } = useContext(DebtContext);
   const { query } = useContext(SearchContext);
   // const [state, dispatch] = useLogic()
-  const [page, setPage] = useState(1);
-  const [filter, setFilter] = useState([])
-  const [isPaid, setIsPaid] = useState(false)
-  const [total, setTotal] = useState(0)
   // const debtsPerPage = 6;
   const currentUserString = localStorage.getItem('currentUser');
   const currentUser = JSON.parse(currentUserString);
   let navigate = useNavigate();
 
-  //get the debts
-  useEffect(() => {
-    setPageType('debts')
-    // const offset = debtsPerPage * (page-1)
-    if (currentUser && currentUser.UserAdmin) {
-      // const axDebts = `http://localhost:8063/api/debts/?limit=${debtsPerPage}&offset=${offset}`
-      const axDebts = `http://localhost:8063/api/debts/`
-      axios.get(axDebts)
-        .then(response => { 
-          // dispatch({ type: 'unpaid', reponse: response.data.data})
-          setDebts(response.data.data) })
-        .catch(error => { console.log(error) })
-    }
-    else {
-      const axDebts = `http://localhost:8063/api/debts/userdebts/${currentUser.id}`
-      axios.get(axDebts)
-        .then(response => { console.log(response); setDebts(response.data.data)})
-        .catch(error => { console.log(error) })
-    }
-  }, [page])
+  // //get the debts
+  // useEffect(() => {
+  //   setPageType('debts')
+  //   // const offset = debtsPerPage * (page-1)
+  //   if (currentUser && currentUser.UserAdmin) {
+  //     // const axDebts = `http://localhost:8063/api/debts/?limit=${debtsPerPage}&offset=${offset}`
+  //     const axDebts = `http://localhost:8063/api/debts/`
+  //     axios.get(axDebts)
+  //       .then(response => { 
+  //         // dispatch({ type: 'unpaid', reponse: response.data.data})
+  //         setDebts(response.data.data) })
+  //       .catch(error => { console.log(error) })
+  //   }
+  //   else {
+  //     const axDebts = `http://localhost:8063/api/debts/userdebts/${currentUser.id}`
+  //     axios.get(axDebts)
+  //       .then(response => { console.log(response); setDebts(response.data.data)})
+  //       .catch(error => { console.log(error) })
+  //   }
+  // }, [debts, currentUser])
   
   //if non user clicks delete, redirect to pna
   const doNotProceed = () => {
@@ -76,15 +73,13 @@ export default function debtHome() {
     <>
       <CssBaseline />
       <main>
+        {debts?<Axios setResponse={setDebts} call={'get'} type={'debts'}/>:null}
         <Container sx={{ py: 8 }} maxWidth="md">
           <FilterComponent debts={debts} currentUser={currentUser}/>
         </Container>
       </main>
       {/* Footer */}
       <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
-        <Typography variant="h6" align="center" gutterBottom>
-          <DebtPages pageHandler={setPage} list={filter.length} />
-        </Typography>
         <Copyright />
       </Box>
       {/* End footer */}

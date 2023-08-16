@@ -16,11 +16,9 @@ export default function FilterComponent(props) {
 
     const debts = props.debts
     const currentUser = props.currentUser
-    console.log(isPaid)
     
     const filterPaid = () => {
         const filteredArray = debts.filter((transaction) => transaction.paid === true)
-        console.log(filteredArray)
         setFilter(filteredArray)
         getTotal(filteredArray)
         setIsPaid(true)
