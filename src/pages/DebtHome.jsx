@@ -38,25 +38,9 @@ export default function debtHome() {
   let navigate = useNavigate();
 
   // //get the debts
-  // useEffect(() => {
-  //   setPageType('debts')
-  //   // const offset = debtsPerPage * (page-1)
-  //   if (currentUser && currentUser.UserAdmin) {
-  //     // const axDebts = `http://localhost:8063/api/debts/?limit=${debtsPerPage}&offset=${offset}`
-  //     const axDebts = `http://localhost:8063/api/debts/`
-  //     axios.get(axDebts)
-  //       .then(response => { 
-  //         // dispatch({ type: 'unpaid', reponse: response.data.data})
-  //         setDebts(response.data.data) })
-  //       .catch(error => { console.log(error) })
-  //   }
-  //   else {
-  //     const axDebts = `http://localhost:8063/api/debts/userdebts/${currentUser.id}`
-  //     axios.get(axDebts)
-  //       .then(response => { console.log(response); setDebts(response.data.data)})
-  //       .catch(error => { console.log(error) })
-  //   }
-  // }, [debts, currentUser])
+  useEffect(() => {
+    setPageType('debts')
+}, [])
   
   //if non user clicks delete, redirect to pna
   const doNotProceed = () => {
@@ -67,13 +51,11 @@ export default function debtHome() {
   //call the function
   doNotProceed()
 
-
-
   return (
     <>
       <CssBaseline />
       <main>
-        {debts?<Axios setResponse={setDebts} call={'get'} type={'debts'}/>:null}
+        {debts && query===''?<Axios setResponse={setDebts} call={'get'} type={'debts'}/>:null}
         <Container sx={{ py: 8 }} maxWidth="md">
           <FilterComponent debts={debts} currentUser={currentUser}/>
         </Container>
