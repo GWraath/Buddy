@@ -7,19 +7,19 @@ import { useNavigate } from "react-router-dom";
 
 
 export const UserInfoEdit = () => {
+    const currentUserString = localStorage.getItem('currentUser');
+    const currentUser = JSON.parse(currentUserString);
     const [name, setName] = useState('')
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [vPassword, setVPassword] = useState('')
-    const [total, setTotal] = useState([])
+    const [total, setTotal] = useState()
 
     const params = useParams();
     const userid = params.id
     // state and useeffect
 
     const [user, setUser] = useState({});
-    const currentUserString = localStorage.getItem('currentUser');
-    const currentUser = JSON.parse(currentUserString);
     let navigate = useNavigate();
 
     //if a non admin is trying to gain access, this will stop it.
@@ -41,17 +41,32 @@ export const UserInfoEdit = () => {
 
     //updates the users
     const userUpdate = () => {
+        console.log('Password:', password, vPassword);
+        const uppercaseLetters = password.match(/[A-Z]/g)
+        const numbersNeeded = password.match(/\d/g)
+        console.log(numbersNeeded)
         if (password === vPassword) {
-            const updateUser = { 'name': name, 'total': total, 'username': username, 'password': password }
-            const axUsers = `http://localhost:8063/api/users/put/` + userid
-            axios.put(axUsers, updateUser)
-                .then(response => { console.log(response); navigate('/users'); })
-                .catch(error => { console.log(error) });
+            if(password.length < 4) {
+                alert('Password must be at least 4 characters long.');
+            }
+            else if(uppercaseLetters==null || uppercaseLetters.length < 1) {
+                alert('Password must have at least 1 uppercase character.');
+            }
+            else if (numbersNeeded==null || numbersNeeded.length < 1) {
+                alert('Password must include 1 number.');
+            }
+            else if (password === user.password) {
+                alert(`Can not match existing password.`)
+            }
+            else {
+                const updateUser = { 'name': name, 'total': total, 'username': username, 'password': password }
+                const axUsers = `http://localhost:8063/api/users/put/` + userid
+                axios.put(axUsers, updateUser)
+                    .then(response => { console.log(response); navigate('/users'); })
+                    .catch(error => { console.log(error) });
+            }
         }
-        else if (password === user.password) {
-            alert(`Choose a different password.`)
-        }
-        else {
+        else if (password !== vPassword) {
             alert('These passwords do not match.')
         }
     }
