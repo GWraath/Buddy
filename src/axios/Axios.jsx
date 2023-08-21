@@ -1,81 +1,37 @@
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function Axios(props) {
-    //   const { state } = useLocation();
-    //   const props = state;
-
+    const [count, setCount] = useState(0);
     useEffect(() => {
-        if (props.call === 'get') {
+        let ax;
+        if (props.call === 'get' && count === 0) {
             if (props.id === undefined) {
-                axios
-                    .get(`http://localhost:8063/api/${props.type}/`)
-                    .then(response => {
-                        props.setResponse(response.data.data)
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
+                ax = axios.get(`http://localhost:8063/api/${props.type}/`)
             }
             else if (props.id && props.type === 'debts') {
-                axios
-                    .get(`http://localhost:8063/api/${props.type}/userdebts/${props.id}`)
-                    .then(response => {
-                        props.setResponse(response.data.data)
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
+                ax = axios.get(`http://localhost:8063/api/${props.type}/userdebts/${props.id}`)
             } else {
-                axios
-                    .get(`http://localhost:8063/api/${props.type}/${props.id}`)
-                    .then(response => {
-                        console.log(response.data.data[0]);
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
+                ax = axios.get(`http://localhost:8063/api/${props.type}/${props.id}`)
             }
-        } else if (props.call === 'post') {
-            axios
-                .post(`http://localhost:8063/api/${props.type}/create/`, props.object)
-                .then(response => {
-                    // console.log(response.data.data);
-                    props.setResponse(response.data.data)
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+        } else if (props.call === 'post' && count === 0) {
+            ax = axios.post(`http://localhost:8063/api/${props.type}/create/`, props.object)
         } else if (props.call === 'put') {
-            axios
-                .put(`http://localhost:8063/api/${props.type}/${props.call}/${props.id}`, props.object)
-                .then(response => {
-                    console.log(response.data.data);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+            ax = axios.put(`http://localhost:8063/api/${props.type}/${props.call}/${props.id}`, props.object)
         } else if (props.call === 'delete') {
             if (props.id === undefined) {
-                axios
-                    .delete(`http://localhost:8063/api/${props.type}/${props.call}`)
-                    .then(response => {
-                        console.log(response.data.data);
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
+                ax = axios.delete(`http://localhost:8063/api/${props.type}/${props.call}`)
             } else {
-                axios
-                    .delete(`http://localhost:8063/api/${props.type}/${props.call}/${props.id}`)
-                    .then(response => {
-                        console.log(response.data.data);
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
+                ax = axios.delete(`http://localhost:8063/api/${props.type}/${props.call}/${props.id}`)
             }
         }
+        ax.then(response => {
+            console.log(response.data.data);
+            setCount(1)
+        })
+            .catch(error => {
+                console.log(error);
+            });
     }, [props.call, props.type, props.object, props.setResponse]);
 
     return null;

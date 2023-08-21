@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
-import { Button, TextField } from '@mui/material'
+import { Button, TextField, Box } from '@mui/material'
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -10,6 +10,8 @@ import { UsersContext } from '../context/UserContext';
 import dayjs from 'dayjs'; // Import Day.js
 import { Troubleshoot } from '@mui/icons-material';
 import Axios from '../axios/Axios';
+import GetUser from '../components/newTransaction/GetUser';
+import GetUsers from '../components/newTransaction/GetUsers';
 
 export const DebtNew = () => {
     const { users } = useContext(UsersContext)
@@ -32,15 +34,15 @@ export const DebtNew = () => {
 
     // {newTrans? <Axios object={newTrans} call={'post'} type={'debts'} id={'3'}/> : null}
 
-    const getInfo = (id) => {
-        setUserId(id)
-        axios.get(`http://localhost:8063/api/debts/userdebts/${id}`)
-            .then(response => {
-                console.log(response);
-                getTotal(response.data.data)
-            })
-            .catch(error => { console.log(error) })
-    }
+    // const getInfo = (id) => {
+    //     setUserId(id)
+    //     axios.get(`http://localhost:8063/api/debts/userdebts/${id}`)
+    //         .then(response => {
+    //             console.log(response);
+    //             getTotal(response.data.data)
+    //         })
+    //         .catch(error => { console.log(error) })
+    // }
 
     const getTotal = (transactions) => {
         const filteredArray = transactions.filter((transaction) => transaction.paid === false)
@@ -55,7 +57,7 @@ export const DebtNew = () => {
         const selectedDate = new Date(date)
         //set the date
         setDueDate(selectedDate);
-      };
+    };
 
     const addToTotal = () => {
         const sum = total + amount
@@ -85,19 +87,29 @@ export const DebtNew = () => {
     }
 
     return (
+
         <div className="plantInfo">
+            <Box
+                sx={{
+                    bgcolor: 'background.paper',
+                    pt: 15,
+                    pb: 4,
+                }}
+            ></Box>
             Add a transaction
             <form>
-                <br></br><div><TextField type='text' onChange={(e) => { getInfo(e.target.value) }} label="User ID"></TextField></div>
-                <Button onClick={() => setAmount(20)}>20</Button><br></br>
+                {/* <br></br><div><TextField type='text' onChange={(e) => { getInfo(e.target.value) }} label="User ID"></TextField></div> */}
+                {/* <br/><GetUser/><br/> */}
+                <br /><GetUsers />
+                {/* <Button onClick={() => setAmount(20)}>20</Button><br></br>
                 <Button onClick={() => setAmount(50)}>50</Button><br></br>
                 <Button onClick={() => setAmount(120)}>120</Button>
                 <div><TextField type='number' onChange={e => setAmount(e.target.value)} label="Custom Amount"></TextField></div><br></br>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker required label={"Due date"} value={dueDate} onChange={handleDateChange} renderInput={(params) => <input {...params} />} format='YYYY-MM-DD' />
+                <LocalizationProvider dateAdapter={AdapterDayjs}> */}
+                    {/* <DatePicker required label={"Due date"} value={dueDate} onChange={handleDateChange} renderInput={(params) => <input {...params} />} format='YYYY-MM-DD' /> */}
                     {/* <DatePicker required label={"Due date"} value={dueDate} onChange={handleDateChange} renderInput={(params) => <input {...params} />} format='DD-MM-YYYY' minDate={new Date()} maxDate={new Date('YYYY-MM-DD')} /> */}
-                </LocalizationProvider><br></br>
-                <Button onClick={dueDate != null ? addToTotal : null}>Add</Button>
+                {/* </LocalizationProvider><br></br>
+                <Button onClick={dueDate != null ? addToTotal : null}>Add</Button> */}
             </form>
             {/* {newTrans?<Axios object={newTrans} call={'post'} type={'debts'} id={'3'}/>:null} */}
         </div>
