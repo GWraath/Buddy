@@ -23,9 +23,10 @@ export default function Theme(props) {
                     bgcolor: 'background.paper',
                     pt: 0,
                     pb: 0,
+                    mt: -10,
                 }}
                 >
-                    <Container maxWidth="sm">
+                    <Container maxWidth="m">
                         <Typography
                         component="h1"
                         variant="p"
