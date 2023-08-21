@@ -78,7 +78,7 @@ export const UserInfoEdit = () => {
                     <Box
                         sx={{
                             bgcolor: 'background.paper',
-                            pt: 8,
+                            pt: 15,
                             pb: 4,
                         }}
                     >
