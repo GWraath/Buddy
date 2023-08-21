@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import HomeMapComponent from '../components/transactions/HomeMapComponent';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import FilterComponent from '../components/transactions/FilterComponent';
-import Axios from '../components/Axios';
+import Axios from '../axios/Axios';
 
 function Copyright() {
   return (

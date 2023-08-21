@@ -8,7 +8,7 @@ import {UsersContext} from './context/UserContext'
 import {SearchContext} from './context/SearchContext'
 import SearchIcon from '@mui/icons-material/Search';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import Axios from './components/Axios';
+import Axios from './axios/Axios';
 
 export default function DebtSearch(props) {
   let [textField, setTextField] = useState('')

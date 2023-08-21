@@ -10,7 +10,7 @@ import DebtHome from '../pages/DebtHome'
 import PNF from '../pages/PNF';
 import Theme from '../theme/Theme';
 import { UserInfoEdit } from '../pages/UserTotalEdit';
-import Axios from '../components/Axios';
+import Axios from '../axios/Axios';
 
 
 export default function AppRoutes() {

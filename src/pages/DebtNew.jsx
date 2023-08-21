@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { UsersContext } from '../context/UserContext';
 import dayjs from 'dayjs'; // Import Day.js
 import { Troubleshoot } from '@mui/icons-material';
-import Axios from '../components/Axios';
+import Axios from '../axios/Axios';
 
 export const DebtNew = () => {
     const { users } = useContext(UsersContext)
