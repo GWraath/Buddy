@@ -11,9 +11,9 @@ const limiter = rateLimit({
   });
   
 
-router.get('/', (req, res) => {
-    console.log(req.query.limit)  
+router.get('/', limiter, (req, res) => { 
     Controllers.getDebts(req, res);
+    console.log(res.err)
 })
 
 router.get('/:id', (req, res) => {

@@ -32,7 +32,12 @@ export default function Axios(props) {
             {props.call === 'get'?props.setResponse(response.data.data):navigate('/')};  
         })
             .catch(error => {
-                console.log(error);
+                if (error.response && error.response.status === 429) {
+                    // Handle 429 error, no stress
+                }
+                else {
+                    console.log(error);
+                }
             });
     }, [props.call, props.type, props.object, props.setResponse]);
 
