@@ -4,7 +4,6 @@ import GetUser from './GetUser';
 export default function GetUsers() {
     const [count, setCount] = useState(0)
     const [users, setUsers] = useState(null);
-    console.log(users)
   return (
     <div>
         {count === 0 ? <Axios setResponse={setUsers} call={'get'} type={'users'} setCount={setCount} count={count} /> : null}

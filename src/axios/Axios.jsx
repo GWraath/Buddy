@@ -7,6 +7,7 @@ export default function Axios(props) {
     // const [count, setCount] = useState(0);
     useEffect(() => {
         let ax;
+
         if (props.call === 'get') {
             if (props.id === undefined) {
                 ax = axios.get(`http://localhost:8063/api/${props.type}/`)
@@ -16,9 +17,9 @@ export default function Axios(props) {
             } else {
                 ax = axios.get(`http://localhost:8063/api/${props.type}/${props.id}`)
             }
-        } else if (props.call === 'post') {
+        } else if (props.call === 'post' && props.object) {
             ax = axios.post(`http://localhost:8063/api/${props.type}/create/`, props.object)
-        } else if (props.call === 'put') {
+        } else if (props.call === 'put' && props.id && props.object) {
             ax = axios.put(`http://localhost:8063/api/${props.type}/${props.call}/${props.id}`, props.object)
         } else if (props.call === 'delete') {
             if (props.id === undefined) {
@@ -29,7 +30,8 @@ export default function Axios(props) {
         }
         ax.then(response => {
             console.log(response.data.data);
-            {props.call === 'get'?props.setResponse(response.data.data):navigate('/')};  
+            {props.call === 'get'?props.setResponse(response.data.data):props.setCount(props.count+1)};
+            {props.call === 'put'? navigate ('/') :null};  
         })
             .catch(error => {
                 if (error.response && error.response.status === 429) {
