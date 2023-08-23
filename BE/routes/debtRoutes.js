@@ -2,6 +2,14 @@
 const express = require("express");
 const router = express.Router();
 const Controllers = require("../controllers/debtController");
+const rateLimit = require('express-rate-limit');
+
+// Create a rate limiter that allows one request per second
+const limiter = rateLimit({
+    windowMs: 1000, // 1 second
+    max: 1, // 1 request per windowMs
+  });
+  
 
 router.get('/', (req, res) => {
     console.log(req.query.limit)  
@@ -16,7 +24,7 @@ router.get('/userdebts/:userid', (req, res) => {
     Controllers.getDebtsByUserID(req, res);
 })
 
-router.post('/create', (req, res) => {
+router.post('/create', limiter, (req, res) => {
     Controllers.createDebts(req.body, res)
 })
 

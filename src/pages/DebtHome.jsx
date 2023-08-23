@@ -7,7 +7,7 @@ import { PageTypeContext } from '../context/PageTypeContext'
 import { SearchContext } from '../context/SearchContext'
 import { useNavigate } from "react-router-dom";
 import FilterComponent from '../components/transactions/FilterComponent';
-import AxiosGet from '../axios/AxiosGet';
+import Axios from '../axios/Axios';
 
 function Copyright() {
   return (
@@ -50,7 +50,7 @@ export default function debtHome() {
     <>
       <CssBaseline />
       <main>
-        {debts && query===''?<AxiosGet setResponse={setDebts} call={'get'} type={'debts'}/>:null}
+        {debts && query===''?<Axios setResponse={setDebts} call={'get'} type={'debts'}/>:null}
         <Container sx={{ py: 8 }} maxWidth="md">
           <FilterComponent debts={debts} currentUser={currentUser}/>
         </Container>
