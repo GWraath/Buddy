@@ -31,7 +31,7 @@ export default function UserMapComponent(props) {
                       {user.name}
                     </Typography>
                     <Typography>
-                      {user.total}
+                      ${user.total}
                     </Typography>
                   </CardContent>
                   <ViewDeleteComponent user={user} />

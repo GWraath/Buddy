@@ -7,7 +7,6 @@ export default function Totalize(props) {
         const amountArray = filteredArray.map(({ amount }) => ({ amount }))
         const sum = amountArray.reduce((acc, curr) => acc + curr.amount, 0);
         props.setTotal(sum)
-        console.log(sum)
     })
     return (
         null

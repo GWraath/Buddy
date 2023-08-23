@@ -29,7 +29,6 @@ export default function Axios(props) {
             }
         }
         ax.then(response => {
-            console.log(response.data.data);
             {props.call === 'get'?props.setResponse(response.data.data):props.setCount(props.count+1)};
             {props.call === 'put'? navigate ('/') :null};  
         })

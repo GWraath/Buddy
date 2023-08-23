@@ -59,8 +59,6 @@ export default function Users() {
         <Container sx={{ py: 8 }} maxWidth="md">
           {/* End hero unit */}
           <UserComponent users={users} currentUser={currentUser}/>
-          
-          {/* <UserMapComponent users={users} /> */}
         </Container>
       </main>
     </>
