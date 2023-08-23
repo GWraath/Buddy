@@ -9,19 +9,6 @@ import { useNavigate } from "react-router-dom";
 import FilterComponent from '../components/transactions/FilterComponent';
 import Axios from '../axios/Axios';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 export default function debtHome() {
   const { pageType, setPageType } = useContext(PageTypeContext);
   const { debts, setDebts } = useContext(DebtContext);

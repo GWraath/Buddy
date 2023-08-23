@@ -1,19 +1,9 @@
 import React from 'react'
 import { Box, Typography, Link } from '@mui/material';
+import Copyright from './components/Copyright';
 
 export default function Footer() {
-    function Copyright() {
-        return (
-            <Typography variant="body2" color="text.secondary" align="center">
-                {'Copyright © '}
-                <Link color="inherit" href="https://mui.com/">
-                    Your Website
-                </Link>{' '}
-                {new Date().getFullYear()}
-                {'.'}
-            </Typography>
-        );
-    }
+    
     return (
         <>
             {/* Footer */}
