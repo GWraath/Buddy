@@ -12,7 +12,7 @@ export default function Inputs(props) {
     const [count, setCount] = useState(null)
 
     const inputCheck = () => {
-        if (amount == null || dueDate == null || total == null) {
+        if (amount == null || dueDate == null || props.user == null) {
             alert('Please fill in all fields')
         } else { setCount(count+1)  } 
     }

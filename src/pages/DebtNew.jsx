@@ -66,26 +66,6 @@ export const DebtNew = () => {
         transAdd(sum)
     }
 
-    //adds a transaction
-    const transAdd = (sum) => {
-        const nextDay = dayjs(dueDate).add(1, 'day');
-        console.log(nextDay)
-        // setNewTrans({ 'userID': userId, 'amount': amount, 'duedate': dueDate ,'total': sum, 'paid': false }) //for Axios component when come back to it
-        const newTrans = { 'userID': userId, 'amount': amount, 'duedate': dueDate, 'total': sum, 'paid': false }
-        console.log(newTrans)
-        const props = { 'call': 'post', 'type': 'debts', 'object': newTrans }
-        // navigate('/axios', {state: props}) //pass in object by state and useLocation
-        const axTrans = `http://localhost:8063/api/debts/create`
-        const axUsers = `http://localhost:8063/api/users/put/${userId}`
-        axios.post(axTrans, newTrans)
-            .then(response => { console.log(response.data); })
-            .catch(error => { console.log(error) });
-        axios.put(axUsers, { 'total': sum })
-            .then(response => { console.log(response.data); })
-            .catch(error => { console.log(error) });
-        navigate('/');
-    }
-
     return (
 
         <div className="plantInfo">
@@ -98,20 +78,9 @@ export const DebtNew = () => {
             ></Box>
             Add a transaction
             <form>
-                {/* <br></br><div><TextField type='text' onChange={(e) => { getInfo(e.target.value) }} label="User ID"></TextField></div> */}
-                {/* <br/><GetUser/><br/> */}
-                <br /><GetUsers />
-                {/* <Button onClick={() => setAmount(20)}>20</Button><br></br>
-                <Button onClick={() => setAmount(50)}>50</Button><br></br>
-                <Button onClick={() => setAmount(120)}>120</Button>
-                <div><TextField type='number' onChange={e => setAmount(e.target.value)} label="Custom Amount"></TextField></div><br></br>
-                <LocalizationProvider dateAdapter={AdapterDayjs}> */}
-                    {/* <DatePicker required label={"Due date"} value={dueDate} onChange={handleDateChange} renderInput={(params) => <input {...params} />} format='YYYY-MM-DD' /> */}
-                    {/* <DatePicker required label={"Due date"} value={dueDate} onChange={handleDateChange} renderInput={(params) => <input {...params} />} format='DD-MM-YYYY' minDate={new Date()} maxDate={new Date('YYYY-MM-DD')} /> */}
-                {/* </LocalizationProvider><br></br>
-                <Button onClick={dueDate != null ? addToTotal : null}>Add</Button> */}
+                <br />
+                <GetUsers />
             </form>
-            {/* {newTrans?<Axios object={newTrans} call={'post'} type={'debts'} id={'3'}/>:null} */}
         </div>
     )
 }

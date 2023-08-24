@@ -24,9 +24,9 @@ export default function GetUser(props) {
         }}
         options={userOptions}
         getOptionLabel={(option) => option.label}
-        sx={{ width: 300 }}
-        renderInput={(params) => <TextField {...params} label="User ID" />}
-      />
+        sx={{ width: 195, margin: '0 auto', textAlign: 'center' }}
+        renderInput={(params) => <TextField {...params} sx={{ textAlign: 'center' }}  label="User ID" />}
+      /><br/>
       {userId && count===1 ? (
         <Axios setResponse={setUser} call={'get'} type={'debts'} id={userId} />
       ) : null}
