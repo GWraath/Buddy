@@ -4,13 +4,11 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Axios(props) {
     const navigate = useNavigate();
-    // const [count, setCount] = useState(0);
     useEffect(() => {
         let ax;
-
         if (props.call === 'get') {
             if (props.id === undefined) {
-                ax = axios.get(`http://localhost:8063/api/${props.type}/`)
+                ax=axios.get(`http://localhost:8063/api/${props.type}/`)
             }
             else if (props.id && props.type === 'debts') {
                 ax = axios.get(`http://localhost:8063/api/${props.type}/userdebts/${props.id}`)
@@ -42,5 +40,5 @@ export default function Axios(props) {
             });
     }, [props.call, props.type, props.object, props.setResponse]);
 
-    return null;
+    return null
 }
