@@ -1,61 +1,43 @@
 import * as React from 'react';
-import {
-  Button, Card, CardActions, CardContent, CardMedia, CssBaseline, Grid, Box, Typography,
-  Container, Link
-} from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useEffect, useState, useContext } from 'react';
-import axios from 'axios';
+import { Button,CssBaseline, Box, Typography, 
+  Container, Link } from '@mui/material';
+import { useEffect, useState, useContext, useReducer } from 'react';
 import { PageTypeContext } from '../context/PageTypeContext'
-import { UsersContext } from '../context/UserContext';
-import { DebtContext } from '../context/DebtContext';
+import { SearchContext } from '../context/SearchContext'
 import { useNavigate } from "react-router-dom";
-import DebtPages from '../components/DebtPages';
 import UserComponent from '../components/users/UserComponent';
+import Axios from '../axios/Axios';
+import { UsersContext } from '../context/UserContext';
 
-export default function Users() {
-  const { setPageType } = useContext(PageTypeContext);
-  const { users, setUsers } = useContext(UsersContext)
-  const { debts } = useContext(DebtContext)
-  const [page, setPage] = useState(1);
-  const [deleted, setDeleted] = useState(false);
-  const [userList, setUserList] = useState(0)
-  const UsersPerPage = 6;
-  let navigate = useNavigate();
-
-  //get and set the current logged in user
+export default function debtHome() {
+  const { pageType, setPageType } = useContext(PageTypeContext);
+  const { users, setUsers } = useContext(UsersContext);
+  const { query } = useContext(SearchContext);
+  // const [state, dispatch] = useLogic()
+  // const debtsPerPage = 6;
   const currentUserString = localStorage.getItem('currentUser');
   const currentUser = JSON.parse(currentUserString);
+  let navigate = useNavigate();
 
-  //if a non admin is trying to gain access, this will stop it.
+  // //get the debts
+  useEffect(() => {
+    setPageType('users')
+}, [])
+  
+  //if non user clicks delete, redirect to pna
   const doNotProceed = () => {
-    if (currentUser === null || currentUser.UserAdmin === 0) {
+    if (currentUser === null) {
       navigate('/pna');
     }
   }
+  //call the function
   doNotProceed()
-
-  //gets users
-  useEffect(() => {
-    setPageType('users')
-    const offset = UsersPerPage * (page - 1)
-    // const axUsers=`http://localhost:8080/api/users?limit=${UsersPerPage}&offset=${offset}`
-    const axUsers = `http://localhost:8063/api/users/`
-    axios.get(axUsers)
-      .then(response => { setUsers(response.data.data) })
-      .catch(error => { console.log(error) })
-  }, [page, deleted])
-
-  useEffect(() => {
-    axios.get(`http://localhost:8063/api/users`)
-      .then(response => { setUserList(response.data) })
-      .catch(error => { console.log(error) })
-  }, [])
 
   return (
     <>
       <CssBaseline />
       <main>
+        {users && query===''?<Axios setResponse={setUsers} call={'get'} type={'users'}/>:null}
         <Container sx={{ py: 8 }} maxWidth="md">
           {/* End hero unit */}
           <UserComponent users={users} currentUser={currentUser}/>

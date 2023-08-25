@@ -42,7 +42,7 @@ export default function PaidDeleteComponent({ debt }, props) {
         console.log(total)
         const axPutUsers = `http://localhost:8063/api/users/put/${userid}`
         axios.put(axPutUsers, { 'total': total })
-            .then(response => { console.log(response.data.data); })
+            .then(response => { console.log(response.data.data); window.location.reload();})
             .catch(error => { console.log(error) })
     }
     return (

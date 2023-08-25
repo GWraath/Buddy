@@ -2,9 +2,15 @@
 const express = require("express");
 const router = express.Router();
 const Controllers = require("../controllers/userController");
+const rateLimit = require('express-rate-limit');
 
-router.get('/', (req, res) => {
+// Create a rate limiter that allows one request per second
+const getLimiter = rateLimit({
+    windowMs: 1000, // 1 second
+    max: 1, // 1 request per windowMs
+  });
 
+router.get('/', getLimiter, (req, res) => {
     Controllers.getUsers(req, res);
 })
 
