@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Button, TextField } from '@mui/material'
+import { Button, TextField, Box } from '@mui/material'
 import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
@@ -64,6 +64,13 @@ export default function Profile() {
   }
   return (
     <>
+    <Box
+                        sx={{
+                            bgcolor: 'background.paper',
+                            pt: 15,
+                            pb: 4,
+                        }}
+                    >
       <Button onClick={loggingOff}>Log out</Button>
       <div className="userInfo">
         {currentUser.username ?
@@ -81,6 +88,7 @@ export default function Profile() {
           : <p> User: {currentUser.username} not found</p>
         }
       </div>
+      </Box>
     </>
   )
 }

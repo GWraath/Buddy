@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Button, TextField } from '@mui/material'
+import { Button, TextField, Box } from '@mui/material'
 import { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
-// import { CurrentUserContext } from '../App';
+import { CurrentUserContext } from '../context/CurrentUserContext';
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -38,7 +38,7 @@ export default function Login() {
       if (LUserName === u.username) {
         matchedUserName = true
         if (LPassWord === u.password) {
-          console.log(u.username, u.password, u.UserAdmin)
+          console.log(u)
           setCurrentUser(u)
           localStorage.setItem('currentUser', JSON.stringify(u))
           navigate('/');
@@ -55,12 +55,20 @@ export default function Login() {
 
   return (
     <>
-      {validateMsg}
-      <div><label>Username</label></div>
-      <TextField type="text" value={LUserName} onChange={e => setLUserName(e.target.value)}></TextField>
-      <div><label>Password</label></div>
-      <TextField type='password' value={LPassWord} onChange={e => setLPassWord(e.target.value)}></TextField>
-      <div><Button size="small" onClick={validateLogin}>Login</Button></div>
+      <Box
+        sx={{
+          bgcolor: 'background.paper',
+          pt: 15,
+          pb: 4,
+        }}
+      >
+        {validateMsg}
+        <div><label>Username</label></div>
+        <TextField type="text" value={LUserName} onChange={e => setLUserName(e.target.value)}></TextField>
+        <div><label>Password</label></div>
+        <TextField type='password' value={LPassWord} onChange={e => setLPassWord(e.target.value)}></TextField>
+        <div><Button size="small" onClick={validateLogin}>Login</Button></div>
+      </Box>
     </>
   );
 }

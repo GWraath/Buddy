@@ -1,7 +1,7 @@
 "use strict";
 const Models = require("../models");
 const bcrypt = require('bcryptjs')
-
+const jwt = require("jsonwebtoken"); // CommonJS syntax
 
 const getUsers = (req, res) => {
     Models.Users.findAll({}).then(function (data) {
@@ -65,22 +65,36 @@ const createUser = async(data, res) => {
 
 // Function to login a user
 const loginUser = (req, res) => {
-    // Find the user with the given email in the User model
-    console.log(req.body.username)
-    console.log(req.body.password)
-    Models.Users.findOne({where: { username: req.body.username }}).then(async function (user) {
-        // If the user exists and the password is correct, send the user data as response
-        if (user && (await bcrypt.compare(req.body.password, user.password))) {
-             res.send({ result: 200, data: user })
-        } else {
-            // If the user does not exist or the password is incorrect, send an error response
-            res.send({ result: 400, data: "Invalid User" });
+    // Find the user with the given username in the User model
+    Models.Users.findOne({ where: { username: req.body.username } }).then(
+        async function (user) {
+            // If the user exists and the password is correct, send the user data as a response
+            if (user && (await bcrypt.compare(req.body.password, user.password))) {
+                // Replace "your-secret-key" with your actual secret key
+                const secretKey = "817960";
+
+                // Create a payload with user information
+                const payload = {
+                    userId: user.id,
+                    username: user.username,
+                };
+
+                // Generate a token with jwt.sign
+                const token = jwt.sign(payload, secretKey, { expiresIn: "1h" });
+
+                // Send the user data and token in the response
+                res.send({ result: 200, data: { user, token } });
+            } else {
+                res.send({ result: 400, data: "Invalid User" });
+            }
         }
-    }).catch(err => {
-        // If there is an error, throw it
-        throw err
-    })
-}
+    ).catch((err) => {
+        // If there is an error, handle it
+        console.error(err);
+        res.status(500).send({ result: 500, data: "Internal Server Error" });
+    });
+};
+
 
 module.exports = {
     getUsers, createUsers, updateUsers, deleteUsers, getUsersByID, loginUser, createUser

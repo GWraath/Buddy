@@ -16,8 +16,8 @@ import Axios from '../axios/Axios';
 export default function AppRoutes() {
     return (
             <Routes>
-                <Route path='/login' element={<Theme component={<Login />} />} />
-                {/* <Route path='/login' element={<Theme component={<NewLogin/>}/>}/> */}
+                {/* <Route path='/login' element={<Theme component={<Login />} />} /> */}
+                <Route path='/login' element={<Theme component={<NewLogin/>}/>}/>
                 <Route path='/debtnew' element={<Theme component={<DebtNew />} />} />
                 <Route path='/users' element={<Theme component={<Users />} />} />
                 <Route path='/userinfo' >
