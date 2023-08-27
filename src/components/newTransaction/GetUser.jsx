@@ -13,9 +13,13 @@ export default function GetUser(props) {
     value: user.id, // Keep the ID as a number
   }));
 
+  const userObj = users.find(user => user.id === userId);
+
   return (
     <>
-      <Autocomplete
+    <div>{user?userObj.name:"Add a transaction"}</div>
+    <br/>
+    <Autocomplete
         disablePortal
         id="User ID"
         onChange={(e, selectedOption) => {

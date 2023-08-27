@@ -76,9 +76,7 @@ export const DebtNew = () => {
                     pb: 4,
                 }}
             ></Box>
-            Add a transaction
             <form>
-                <br />
                 <GetUsers />
             </form>
         </div>

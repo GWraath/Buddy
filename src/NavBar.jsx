@@ -17,7 +17,6 @@ const Navbar = () => {
   //gets the logged in user
   const currentUserString = localStorage.getItem('currentUser');
   const currentUser = JSON.parse(currentUserString);
-  console.log(currentUser)
   const pathname = location.pathname
   const [doISearch, setDoISearch] = useState(false)
 
