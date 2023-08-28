@@ -11,6 +11,7 @@ const Navbar = () => {
   const location = useLocation();
   const users = <NavLink id="link" to='/users' exact="true" forcerefresh="true">Users</NavLink>
   const debts = <NavLink id="link" to='/' exact="true" forcerefresh="true">Transactions</NavLink>
+  const chats = <NavLink id="link" to='/chat' exact="true" forcerefresh="true">Chat</NavLink>
   const clear = <NavLink onClick={() => setDoISearch(!doISearch)} outline='none' ><ClearIcon id="link" sx={{ mr: 2 }} /></NavLink>
   const search = <NavLink onClick={() => setDoISearch(!doISearch)} outline='none' ><SearchIcon id="link" sx={{ mr: 2 }} /></NavLink>
 
@@ -28,6 +29,7 @@ const Navbar = () => {
             {currentUser && currentUser.UserAdmin && pathname !== '/users' ? users : null}
             {currentUser && pathname !== '/' ? debts : null}
             {pathname == '/profile' || pathname == '/login' ? null : <NavLink id="link" to='/profile'>{currentUser.username}</NavLink>}
+            {currentUser? chats: null}
             {doISearch ? clear : search}
           </Typography>
         </Toolbar>
