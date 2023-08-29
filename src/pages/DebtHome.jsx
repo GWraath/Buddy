@@ -39,7 +39,7 @@ export default function debtHome() {
       <main>
         {debts && query===''?<Axios setResponse={setDebts} call={'get'} type={'debts'}/>:null}
         <Container sx={{ py: 8 }} maxWidth="md">
-          <FilterComponent debts={debts} currentUser={currentUser}/>
+          {currentUser?<FilterComponent debts={debts} currentUser={currentUser}/>:null}
         </Container>
       </main>
       </>

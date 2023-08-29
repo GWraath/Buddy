@@ -1,11 +1,9 @@
-import { React, useEffect, useState } from 'react'
+import { React, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { AppBar, Toolbar, Typography, Button } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 import Search from './Search';
-
-
 
 const Navbar = () => {
   const location = useLocation();
@@ -20,7 +18,7 @@ const Navbar = () => {
   const currentUser = JSON.parse(currentUserString);
   const pathname = location.pathname
   const [doISearch, setDoISearch] = useState(false)
-
+  
   return (
     <>
       <AppBar position="sticky" className='AppBar' sx={{ backgroundColor: '#4A8E51' }}>
@@ -28,7 +26,7 @@ const Navbar = () => {
           <Typography variant="h6" color="inherit" noWrap id="toolItems">
             {currentUser && currentUser.UserAdmin && pathname !== '/users' ? users : null}
             {currentUser && pathname !== '/' ? debts : null}
-            {pathname == '/profile' || pathname == '/login' ? null : <NavLink id="link" to='/profile'>{currentUser.username}</NavLink>}
+            {pathname == '/profile' || pathname == '/login'? null : <>{currentUser?<NavLink id="link" to='/profile'>{currentUser.username}</NavLink>: null}</> }
             {currentUser? chats: null}
             {doISearch ? clear : search}
           </Typography>
