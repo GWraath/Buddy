@@ -7,7 +7,7 @@ export default function Page(props) {
     const [username, setUsername] = useState(props.currentUser.username)
     const [password, setPassword] = useState('')
     const [vPassword, setVPassword] = useState('')
-    const [update, setUpdate] = useState(false)
+    const [count, setCount] = useState(false)
 
     const currentUser = props.currentUser
     const updateUser = { 'name': name, 'username': username, 'password': password }
@@ -24,8 +24,8 @@ export default function Page(props) {
                 <div><TextField type='text' onChange={e => setUsername(e.target.value)} defaultValue={currentUser.username} label="Username"></TextField></div><br></br>
                 <div><TextField type='password' onChange={e => setPassword(e.target.value)} label="Password"></TextField></div><br></br>
                 <div><TextField type='password' onChange={e => setVPassword(e.target.value)} label="Verify Password"></TextField></div><br></br>
-                <Button onClick={password === vPassword ?()=>setUpdate(true):()=>alert('These passwords do not match.')}>Update</Button>
-                {update ? <Axios call={'put'} type={'users'} id={currentUser.id} object={updateUser}/> : null}
+                <Button onClick={password === vPassword ?()=>setCount(count+1):()=>alert('These passwords do not match.')}>Update</Button>
+                {count===1 ? <Axios call={'put'} type={'users'} id={currentUser.id} object={updateUser} setCount={setCount} count={count}/> : null}
               </form>
             </>
             : <p> User: {currentUser.username} not found</p>

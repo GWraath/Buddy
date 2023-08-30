@@ -22,33 +22,38 @@ const getUsersByID = (req, res) => {
 const validatePasswordOfUser = (req, res) => {
     const path = req.route.path
     const password = req.body.password
-    const uppercaseLetters = password.match(/[A-Z]/g)
-    const numbersNeeded = password.match(/\d/g)
-    if(password.length < 4) {
-        res.send({ result: 400, message: 'Password must be at least 4 characters long.' })
-    }
-    // else if (password === currentUser.password) {
-    //     res.send({ result: 400, message: 'Password must be at least 4 characters long.' })
-    //   alert(`Can not match existing password.`)
-    // }
-    else if(uppercaseLetters==null || uppercaseLetters.length < 1) {
-        res.send({ result: 400, message: 'Password must have at least 1 uppercase character.' })
-    }
-    else if (numbersNeeded==null || numbersNeeded.length < 1) {
-        res.send({ result: 400, message: 'Password must include at least 1 number.' })
-    }
-    else if (path==='/put/:id') {
+    if (password) {
+        const uppercaseLetters = password.match(/[A-Z]/g)
+        const numbersNeeded = password.match(/\d/g)
+        if (password.length < 4) {
+            res.send({ result: 400, message: 'Password must be at least 4 characters long.' })
+        }
+        // else if (password === currentUser.password) {
+        //     res.send({ result: 400, message: 'Password must be at least 4 characters long.' })
+        //   alert(`Can not match existing password.`)
+        // }
+        else if (uppercaseLetters == null || uppercaseLetters.length < 1) {
+            res.send({ result: 400, message: 'Password must have at least 1 uppercase character.' })
+        }
+        else if (numbersNeeded == null || numbersNeeded.length < 1) {
+            res.send({ result: 400, message: 'Password must include at least 1 number.' })
+        }
+        else if (path === '/put/:id') {
+            // req.body.password = bcrypt.hash(req.body.password, 10);
+            updateUsers(req, res)
+            // console.log(req.params.id)
+        }
+        else {
+            validateCreatedUser(req.body, res)
+        }
+    } else {
         updateUsers(req, res)
-        // console.log(req.params.id)
-    }
-    else {
-        validateCreatedUser(req.body, res)
     }
 }
 
 const validateCreatedUser = (data, res) => {
-    const body = data 
-    Models.Users.findAll({where: {username: data.username}}, body).then(function (data) {
+    const body = data
+    Models.Users.findAll({ where: { username: data.username } }, body).then(function (data) {
         if (data.length > 0) {
             res.send({ result: 400, message: "Username already exists" })
         } else {
@@ -60,8 +65,7 @@ const validateCreatedUser = (data, res) => {
 }
 
 const updateUsers = async (req, res) => {
-    // Hash the user's password
-    req.body.password = await bcrypt.hash(req.body.password, 10);
+    if (req.body.password) {req.body.password = await bcrypt.hash(req.body.password, 10);}// Hash the user's password
     Models.Users.update(req.body, {
         where: {
             id:
