@@ -19,16 +19,35 @@ const getUsersByID = (req, res) => {
     })
 }
 
+const validatePasswordOfUser = (data, res) => {
+    const password = data.password
+    const uppercaseLetters = password.match(/[A-Z]/g)
+    const numbersNeeded = password.match(/\d/g)
+    if(password.length < 4) {
+        res.send({ result: 400, message: 'Password must be at least 4 characters long.' })
+    }
+    // else if (password === currentUser.password) {
+    //     res.send({ result: 400, message: 'Password must be at least 4 characters long.' })
+    //   alert(`Can not match existing password.`)
+    // }
+    else if(uppercaseLetters==null || uppercaseLetters.length < 1) {
+        res.send({ result: 400, message: 'Password must have at least 1 uppercase character.' })
+    }
+    else if (numbersNeeded==null || numbersNeeded.length < 1) {
+        res.send({ result: 400, message: 'Password must include at least 1 number.' })
+    }
+    else {
+        validateCreatedUser(data, res)
+    }
+}
+
 const validateCreatedUser = (data, res) => {
-    const body = data
+    const body = data 
     Models.Users.findAll({where: {username: data.username}}, body).then(function (data) {
-        console.log(body)
-        // res.send({ result: 200, data: data })
         if (data.length > 0) {
             res.send({ result: 400, message: "Username already exists" })
         } else {
             createUser(body, res)
-            // res.send({ result: 200, data: data })
         }
     }).catch(err => {
         throw err
@@ -59,7 +78,6 @@ const deleteUsers = (req, res) => {
 
 // Function to create a new user
 const createUser = async (data, res) => {
-    // console.log(data)
     // Hash the user's password
     data.password = await bcrypt.hash(data.password, 10);
     // Create a new user in the User model
@@ -106,5 +124,5 @@ const loginUser = (req, res) => {
 
 
 module.exports = {
-    getUsers, validateCreatedUser, updateUsers, deleteUsers, getUsersByID, loginUser, createUser
+    getUsers, validatePasswordOfUser, updateUsers, deleteUsers, getUsersByID, loginUser
 }

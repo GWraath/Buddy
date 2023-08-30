@@ -21,8 +21,8 @@ router.get('/:id', (req, res) => {
 
 // // Setting up a POST request for the "/create" endpoint
 router.post('/create', (req, res) => {
-    //Calling the ValidateCreatedUser function from the userController module, passing in the request body and response objects
-    Controllers.validateCreatedUser(req.body, res);
+    //Calling the validatePasswordOfUser function from the userController module, passing in the request body and response objects
+    Controllers.validatePasswordOfUser(req.body, res);
 });
 
 // Setting up a POST request for the "/login" endpoint
