@@ -19,14 +19,10 @@ router.get('/:id', (req, res) => {
     Controllers.getUsersByID(req, res);
 })
 
-router.post('/create', (req, res) => {
-    Controllers.createUsers(req.body, res)
-})
-
 // // Setting up a POST request for the "/create" endpoint
-router.post('/newcreate', (req, res) => {
-    // Calling the createUser function from the userController module, passing in the request body and response objects
-    Controllers.createUser(req.body, res);
+router.post('/create', (req, res) => {
+    //Calling the ValidateCreatedUser function from the userController module, passing in the request body and response objects
+    Controllers.validateCreatedUser(req.body, res);
 });
 
 // Setting up a POST request for the "/login" endpoint

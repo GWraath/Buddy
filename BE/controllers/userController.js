@@ -12,16 +12,24 @@ const getUsers = (req, res) => {
 }
 
 const getUsersByID = (req, res) => {
-    Models.Users.findAll({where: { id: req.params.id }}).then(function (data) {
+    Models.Users.findAll({ where: { id: req.params.id } }).then(function (data) {
         res.send({ result: 200, data: data })
     }).catch(err => {
         throw err
     })
 }
 
-const createUsers = (data, res) => {
-    Models.Users.create(data).then(function (data) {
-        res.send({ result: 200, data: data })
+const validateCreatedUser = (data, res) => {
+    const body = data
+    Models.Users.findAll({where: {username: data.username}}, body).then(function (data) {
+        console.log(body)
+        // res.send({ result: 200, data: data })
+        if (data.length > 0) {
+            res.send({ result: 400, message: "Username already exists" })
+        } else {
+            createUser(body, res)
+            // res.send({ result: 200, data: data })
+        }
     }).catch(err => {
         throw err
     })
@@ -50,7 +58,8 @@ const deleteUsers = (req, res) => {
 }
 
 // Function to create a new user
-const createUser = async(data, res) => {
+const createUser = async (data, res) => {
+    // console.log(data)
     // Hash the user's password
     data.password = await bcrypt.hash(data.password, 10);
     // Create a new user in the User model
@@ -97,5 +106,5 @@ const loginUser = (req, res) => {
 
 
 module.exports = {
-    getUsers, createUsers, updateUsers, deleteUsers, getUsersByID, loginUser, createUser
+    getUsers, validateCreatedUser, updateUsers, deleteUsers, getUsersByID, loginUser, createUser
 }
