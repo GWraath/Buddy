@@ -19,8 +19,9 @@ const getUsersByID = (req, res) => {
     })
 }
 
-const validatePasswordOfUser = (data, res) => {
-    const password = data.password
+const validatePasswordOfUser = (req, res) => {
+    const path = req.route.path
+    const password = req.body.password
     const uppercaseLetters = password.match(/[A-Z]/g)
     const numbersNeeded = password.match(/\d/g)
     if(password.length < 4) {
@@ -36,8 +37,11 @@ const validatePasswordOfUser = (data, res) => {
     else if (numbersNeeded==null || numbersNeeded.length < 1) {
         res.send({ result: 400, message: 'Password must include at least 1 number.' })
     }
+    else if (path==='/put/:id') {
+        updateUsers(req, res)
+    }
     else {
-        validateCreatedUser(data, res)
+        validateCreatedUser(req.body, res)
     }
 }
 
@@ -54,7 +58,9 @@ const validateCreatedUser = (data, res) => {
     })
 }
 
-const updateUsers = (req, res) => {
+const updateUsers = async (req, res) => {
+    // Hash the user's password
+    req.body.password = await bcrypt.hash(req.body.password, 10);
     Models.Users.update(req.body, {
         where: {
             id:

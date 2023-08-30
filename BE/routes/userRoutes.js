@@ -15,14 +15,13 @@ router.get('/', getLimiter, (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-
     Controllers.getUsersByID(req, res);
 })
 
 // // Setting up a POST request for the "/create" endpoint
 router.post('/create', (req, res) => {
     //Calling the validatePasswordOfUser function from the userController module, passing in the request body and response objects
-    Controllers.validatePasswordOfUser(req.body, res);
+    Controllers.validatePasswordOfUser(req, res);
 });
 
 // Setting up a POST request for the "/login" endpoint
@@ -32,7 +31,7 @@ router.post('/login', (req, res) => {
 });
 
 router.put('/put/:id', (req, res) => {
-    Controllers.updateUsers(req, res)
+    Controllers.validatePasswordOfUser(req, res)
 })
 
 router.delete('/delete/:id', (req, res) => {

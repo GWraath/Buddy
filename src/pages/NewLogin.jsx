@@ -27,13 +27,11 @@ export default function NewLogin() {
         setCurrentUser(user);
         localStorage.setItem("currentUser", JSON.stringify(user));
       } else { alert("Incorrect username or password") }
-      // const { token } = response.data.data;
-      
-      // console.log(token)
       
       navigate("/");
     } catch (error) {
       console.error(error);
+      alert('Password or username is incorrect.')
     }
   };
 
