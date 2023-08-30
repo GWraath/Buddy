@@ -66,10 +66,6 @@ export default function NewLogin() {
             Login
           </Button>
         </div>
-        <div>No account yet?</div>
-        <Button size="small" href={"/reg/"}>
-          Register
-        </Button>
       </Box>
     </div>
   );

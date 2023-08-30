@@ -39,6 +39,7 @@ const validatePasswordOfUser = (req, res) => {
     }
     else if (path==='/put/:id') {
         updateUsers(req, res)
+        // console.log(req.params.id)
     }
     else {
         validateCreatedUser(req.body, res)

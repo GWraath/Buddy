@@ -18,7 +18,7 @@ export default function Page(props) {
           {currentUser.username ?
             <>
               <h3>{currentUser.name}</h3>
-              <h5>You currently owe: {currentUser.total}</h5>
+              <h5>You currently owe: ${currentUser.total}</h5>
               <form>
                 <div><TextField type='text' onChange={e => setName(e.target.value)} defaultValue={currentUser.name} label="Name"></TextField></div><br></br>
                 <div><TextField type='text' onChange={e => setUsername(e.target.value)} defaultValue={currentUser.username} label="Username"></TextField></div><br></br>
