@@ -9,9 +9,7 @@ import DebtHome from '../pages/DebtHome'
 import PNF from '../pages/PNF';
 import Theme from '../theme/Theme';
 import { UserInfoEdit } from '../pages/UserTotalEdit';
-import Axios from '../axios/Axios';
 import ChatApp from '../pages/Chat';
-import Redirect from '../components/Redirect';
 
 
 export default function AppRoutes() {
@@ -20,19 +18,17 @@ export default function AppRoutes() {
     return (
         <>
             <Routes>
-                <Route path="/*" element={<>{currentUser?<Theme component={<PNF />} />:<Theme component={<Redirect />} />}</>}/>
+                <Route path="/*" element={<Theme component={<PNF currentUser={currentUser}/>} />}/>
                 <Route path='/login' element={<Theme component={<NewLogin />} />} />
-                <Route path='/debtnew' element={<Theme component={<DebtNew />} />} />
-                <Route path='/users' element={<Theme component={<Users />} />} />
+                <Route path='/debtnew' element={<>{currentUser?<Theme component={<DebtNew />} />:<Theme component={<PageNotAllowed currentUser={currentUser}/>} />}</>} />
+                <Route path='/users' element={<>{currentUser?<Theme component={<Users />} />:<Theme component={<PageNotAllowed currentUser={currentUser}/>} />}</>} />
                 <Route path='/userinfo' >
-                    <Route path=':id' element={<Theme component={<UserInfoEdit />} />} />
+                    <Route path=':id' element={<>{currentUser?<Theme component={<UserInfoEdit />} />:<Theme component={<PageNotAllowed currentUser={currentUser}/>} />}</>} />
                 </Route>
-                <Route path='/chat' element={<Theme component={<ChatApp />} />} />
-                <Route path='/axios' element={<Axios />} />
-                <Route path='/' element={<Theme component={<DebtHome />} />} />
-                <Route path='/profile' element={<Theme component={<Profile />} />} />
+                <Route path='/chat' element={<>{currentUser?<Theme component={<ChatApp />} />:<Theme component={<PageNotAllowed currentUser={currentUser}/>} />}</>} />
+                <Route path='/' element={<>{currentUser?<Theme component={<DebtHome />} />:<Theme component={<PageNotAllowed currentUser={currentUser}/>} />}</>} />
+                <Route path='/profile' element={<>{currentUser?<Theme component={<Profile />} />:<Theme component={<PageNotAllowed currentUser={currentUser}/>} />}</>} />
                 <Route path='/pna' element={<Theme component={<PageNotAllowed />} />} />
-                <Route path='*' element={<Theme component={<PNF />} />} />
             </Routes>
         </>
     )

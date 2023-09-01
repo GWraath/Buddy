@@ -11,11 +11,13 @@ export default function OverdueComponent({ debt }) {
 
     const getDate = debt.duedate;
     const paid = debt.paid;
+    
+    const nzDate = parseInt(getDate.slice(8, 10))
 
     const dueDate = new Date(
         getDate.slice(0, 4),
         getDate.slice(5, 7) - 1,
-        getDate.slice(8, 10)
+        nzDate+1
         )
 
     if (currentDateWithoutTime > dueDate) {

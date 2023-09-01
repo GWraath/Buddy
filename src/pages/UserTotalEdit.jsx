@@ -9,11 +9,6 @@ import { useNavigate } from "react-router-dom";
 export const UserInfoEdit = () => {
     const currentUserString = localStorage.getItem('currentUser');
     const currentUser = JSON.parse(currentUserString);
-    const [name, setName] = useState('')
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    const [vPassword, setVPassword] = useState('')
-    const [total, setTotal] = useState()
 
     const params = useParams();
     const userid = params.id
@@ -39,70 +34,62 @@ export const UserInfoEdit = () => {
             .catch(error => { console.log(error) })
     }, [userid])
 
+    const [name, setName] = useState(user.name)
+    const [username, setUsername] = useState(user.username)
+    const [password, setPassword] = useState('')
+    const [vPassword, setVPassword] = useState('')
+    const [total, setTotal] = useState(user.total)
+
     //updates the users
     const userUpdate = () => {
         console.log('Password:', password, vPassword);
-        const uppercaseLetters = password.match(/[A-Z]/g)
-        const numbersNeeded = password.match(/\d/g)
-        console.log(numbersNeeded)
         if (password === vPassword) {
-            if(password.length < 4) {
-                alert('Password must be at least 4 characters long.');
-            }
-            else if(uppercaseLetters==null || uppercaseLetters.length < 1) {
-                alert('Password must have at least 1 uppercase character.');
-            }
-            else if (numbersNeeded==null || numbersNeeded.length < 1) {
-                alert('Password must include 1 number.');
-            }
-            else if (password === user.password) {
-                alert(`Can not match existing password.`)
-            }
-            else {
-                const updateUser = { 'name': name, 'total': total, 'username': username, 'password': password }
-                const axUsers = `http://localhost:8063/api/users/put/` + userid
-                axios.put(axUsers, updateUser)
-                    .then(response => { console.log(response); navigate('/users'); })
-                    .catch(error => { console.log(error) });
-            }
+            const updateUser = { 'name': name, 'total': total, 'username': username, 'password': password }
+            const axUsers = `http://localhost:8063/api/users/put/` + userid
+            axios.put(axUsers, updateUser)
+                .then(response => { console.log(response); navigate('/users'); })
+                .catch(error => { console.log(error) });
         }
         else if (password !== vPassword) {
             alert('These passwords do not match.')
         }
     }
 
-    return (
-        <div className="userInfo">
-            {userid ?
-                <>
-                    <Box
-                        sx={{
-                            bgcolor: 'background.paper',
-                            pt: 15,
-                            pb: 4,
-                        }}
+
+
+return (
+    <div className="userInfo">
+        {userid ?
+            <>
+                <Box
+                    sx={{
+                        bgcolor: 'background.paper',
+                        pt: 15,
+                        pb: 4,
+                    }}
+                >
+                    <Typography
+                        variant="h4"
+                        align="center"
+                        color="text.secondary"
+                        component="p"
                     >
-                        <Typography
-                            variant="h4"
-                            align="center"
-                            color="text.secondary"
-                            component="p"
-                        >
-                            User ID: {userid}<br /><br />
-                            Currently Owes: ${user.total}
-                        </Typography>
-                        <form><br></br>
-                            <div><TextField type='number' key={user.total} onChange={e => setTotal(e.target.value)} defaultValue={user.total} label="Change total owed"></TextField></div><br></br>
-                            <div><TextField type='text' key={user.name} onChange={e => setName(e.target.value)} defaultValue={user.name} label="First Name"></TextField></div><br></br>
-                            <div><TextField type='text' key={user.username} onChange={e => setUsername(e.target.value)} defaultValue={user.username} label="Username"></TextField></div><br></br>
-                            <div><TextField type='password' onChange={e => setPassword(e.target.value)} defaultValue={user.password} label="Password"></TextField></div><br></br>
-                            <div><TextField type='password' onChange={e => setVPassword(e.target.value)} label="Password"></TextField></div><br></br>
-                            <Button onClick={userUpdate}>Update</Button>
-                        </form>
-                    </Box>
-                </>
-                : <p> User: {userid} not found</p>
-            }
-        </div>
-    )
+                        User ID: {userid}<br /><br />
+                        Currently owes: ${user.total}
+                    </Typography>
+                    <form><br></br>
+                        <div><TextField type='number' key={user.total} onChange={e => setTotal(e.target.value)} defaultValue={user.total} label="Change total owed"></TextField></div><br></br>
+                        <div><TextField type='text' key={user.name} onChange={e => setName(e.target.value)} defaultValue={user.name} label="First Name"></TextField></div><br></br>
+                        <div><TextField type='text' key={user.username} onChange={e => setUsername(e.target.value)} defaultValue={user.username} label="Username"></TextField></div><br></br>
+                        {/* <div><TextField type='password' onChange={e => setPassword(e.target.value)} defaultValue={user.password} label="Password"></TextField></div><br></br>
+                            <div><TextField type='password' onChange={e => setVPassword(e.target.value)} label="Password"></TextField></div><br></br> */}
+                        <Button onClick={() => setPassword('')}>Reset Password</Button><br />
+                        <Button onClick={userUpdate}>Update</Button>
+                    </form>
+                </Box>
+            </>
+            : <p> User: {userid} not found</p>
+        }
+    </div>
+)
 }

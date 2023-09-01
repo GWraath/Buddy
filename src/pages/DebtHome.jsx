@@ -24,14 +24,14 @@ export default function debtHome() {
     setPageType('debts')
 }, [])
   
-  //if non user clicks delete, redirect to pna
-  const doNotProceed = () => {
-    if (currentUser === null) {
-      navigate('/pna');
-    }
-  }
-  //call the function
-  doNotProceed()
+  // //if non user clicks delete, redirect to pna
+  // const doNotProceed = () => {
+  //   if (currentUser === null) {
+  //     navigate('/pna');
+  //   }
+  // }
+  // //call the function
+  // doNotProceed()
 
   return (
     <>

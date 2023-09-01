@@ -25,7 +25,12 @@ const validatePasswordOfUser = (req, res) => {
     if (password) {
         const uppercaseLetters = password.match(/[A-Z]/g)
         const numbersNeeded = password.match(/\d/g)
-        if (password.length < 4) {
+        console.log(password)
+        if (password==='') {
+            password='Pass1'
+            updateUsers(req, res)
+        }
+        else if (password.length < 4) {
             res.send({ result: 400, message: 'Password must be at least 4 characters long.' })
         }
         // else if (password === currentUser.password) {
@@ -39,9 +44,7 @@ const validatePasswordOfUser = (req, res) => {
             res.send({ result: 400, message: 'Password must include at least 1 number.' })
         }
         else if (path === '/put/:id') {
-            // req.body.password = bcrypt.hash(req.body.password, 10);
             updateUsers(req, res)
-            // console.log(req.params.id)
         }
         else {
             validateCreatedUser(req.body, res)
