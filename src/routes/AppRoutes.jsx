@@ -27,6 +27,7 @@ export default function AppRoutes() {
                 </Route>
                 <Route path='/chat' element={<>{currentUser?<Theme component={<ChatApp />} />:<Theme component={<PageNotAllowed currentUser={currentUser}/>} />}</>} />
                 <Route path='/' element={<>{currentUser?<Theme component={<DebtHome />} />:<Theme component={<PageNotAllowed currentUser={currentUser}/>} />}</>} />
+                {/* <Route path='/' element={<Theme component={<DebtHome />} />} /> */}
                 <Route path='/profile' element={<>{currentUser?<Theme component={<Profile />} />:<Theme component={<PageNotAllowed currentUser={currentUser}/>} />}</>} />
                 <Route path='/pna' element={<Theme component={<PageNotAllowed />} />} />
             </Routes>
