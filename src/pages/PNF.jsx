@@ -2,11 +2,13 @@ import React, { useEffect } from 'react';
 import { Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-export default function PageNotFound(props) {
+export default function PageNotFound() {
   const navigate = useNavigate();
+  const currentUserString = localStorage.getItem('currentUser');
+  const currentUser = JSON.parse(currentUserString);
 
   useEffect(() => {
-    if (props.currentUser)
+    if (currentUser)
     setTimeout(() => {
       navigate('/')
     }, 5000)
@@ -28,7 +30,7 @@ export default function PageNotFound(props) {
     >
       <div>
         Page not found.<br/>
-        {props.currentUser
+        {currentUser
         ?'Redirecting to the home page.'
         :'Redirecting to the login page.'}
       </div>

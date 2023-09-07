@@ -8,7 +8,6 @@ export default function PageNotAllowed() {
   const currentUser = JSON.parse(currentUserString);
   
   useEffect(() => {
-    console.log(currentUser);
     if (currentUser)
     setTimeout(() => {
       navigate('/')

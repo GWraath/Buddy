@@ -10,25 +10,24 @@ import PNF from '../pages/PNF';
 import Theme from '../theme/Theme';
 import { UserInfoEdit } from '../pages/UserTotalEdit';
 import ChatApp from '../pages/Chat';
+import ProtectedRoute from './ProtectedRoute';
 
 
 export default function AppRoutes() {
-    const currentUserString = localStorage.getItem('currentUser');
-    const currentUser = JSON.parse(currentUserString);
+
     return (
         <>
             <Routes>
-                <Route path="/*" element={<Theme component={<PNF currentUser={currentUser}/>} />}/>
+                <Route path="/*" element={<Theme component={<PNF />} />}/>
                 <Route path='/login' element={<Theme component={<NewLogin />} />} />
-                <Route path='/debtnew' element={<>{currentUser?<Theme component={<DebtNew />} />:<Theme component={<PageNotAllowed currentUser={currentUser}/>} />}</>} />
-                <Route path='/users' element={<>{currentUser?<Theme component={<Users />} />:<Theme component={<PageNotAllowed currentUser={currentUser}/>} />}</>} />
+                <Route path='/debtnew' element={<ProtectedRoute><Theme component={<DebtNew />} /></ProtectedRoute>} />
+                <Route path='/users' element={<ProtectedRoute><Theme component={<Users />} /></ProtectedRoute>} />
                 <Route path='/userinfo' >
-                    <Route path=':id' element={<>{currentUser?<Theme component={<UserInfoEdit />} />:<Theme component={<PageNotAllowed currentUser={currentUser}/>} />}</>} />
+                    <Route path=':id' element={<ProtectedRoute><Theme component={<UserInfoEdit />} /></ProtectedRoute>} />
                 </Route>
-                <Route path='/chat' element={<>{currentUser?<Theme component={<ChatApp />} />:<Theme component={<PageNotAllowed currentUser={currentUser}/>} />}</>} />
-                <Route path='/' element={<>{currentUser?<Theme component={<DebtHome />} />:<Theme component={<PageNotAllowed currentUser={currentUser}/>} />}</>} />
-                {/* <Route path='/' element={<Theme component={<DebtHome />} />} /> */}
-                <Route path='/profile' element={<>{currentUser?<Theme component={<Profile />} />:<Theme component={<PageNotAllowed currentUser={currentUser}/>} />}</>} />
+                <Route path='/chat' element={<ProtectedRoute><Theme component={<ChatApp />} /></ProtectedRoute>} />
+                <Route path='/' element={<ProtectedRoute><Theme component={<DebtHome />} /></ProtectedRoute>} />
+                <Route path='/profile' element={<ProtectedRoute><Theme component={<Profile />} /></ProtectedRoute>} />
                 <Route path='/pna' element={<Theme component={<PageNotAllowed />} />} />
             </Routes>
         </>
