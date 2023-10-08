@@ -16,10 +16,10 @@ export default function debtHome() {
   const currentUserString = localStorage.getItem('currentUser');
   const currentUser = JSON.parse(currentUserString);
 
-  const transData = useAxios(
-    'get', 'debts', query
-  );
-  console.log(transData)
+  // const transData = useAxios(
+  //   'get', 'debts', query
+  // );
+  // console.log(transData)
 
   // //get the debts
   useEffect(() => {

@@ -68,18 +68,7 @@ const createDebts = (data, res) => {
     }).catch(err => {
         throw err
     })
-}
-
-// const createDebts = (data, res) => {
-//     Models.Debts.create(data).then((data) => {
-//       // Clear the "debts" cache
-//       client.del("debts");
-//       res.send({ result: 200, data: data });
-//     }).catch(err => {
-//       throw err;
-//     });
-//   };
-  
+} 
 
 const updateDebts = (req, res) => {
     Models.Debts.update(req.body, {

@@ -78,8 +78,6 @@ button:focus {
 }
 
 #plantica{
-  /* position:absolute;
-  left:0vh */
   color: #4A8E51;
   text-align: center;
 }
@@ -87,4 +85,20 @@ button:focus {
 #link{
   margin-left: 32px;
   color: white
+}
+
+#onlineUsers {
+  position: absolute;
+  font-size: 2vh;
+  top: 80px;
+  text-align: left;
+  color: #4A8E51;
+  width: 200px
+}
+
+#messages {
+  font-size: 3vh;
+  list-style-type: none;
+  margin-left: 200px;
+  text-align: left;
 }

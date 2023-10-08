@@ -3,21 +3,24 @@ import { Box, Typography, Link } from '@mui/material';
 import Copyright from './components/Copyright';
 
 export default function Footer() {
-    
+
     return (
         <>
             {/* Footer */}
-            <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
+            <Box sx={{ bgcolor: 'background.paper', p: 0 }} component="footer">
+                <Typography variant="h6" align="center" gutterBottom>
+                    Buddy
+                </Typography>
                 <Typography
                     variant="subtitle1"
                     align="center"
                     color="text.secondary"
                     component="p"
                 >
-                    Choose a page to explore more!
+                    All rights reserved.
                 </Typography>
-                <Copyright />
             </Box>
-            {/* End footer */}</>
+            {/* End footer */}
+        </>
     )
 }

@@ -3,7 +3,7 @@ import {
   Button, CssBaseline, Box, Typography,
   Container, Link
 } from '@mui/material';
-import { useEffect, useState, useContext, useReducer } from 'react';
+import { useEffect, useState} from 'react';
 import DebtPages from '../DebtPages';
 import HomeMapComponent from './HomeMapComponent';
 import RefreshIcon from '@mui/icons-material/Refresh';
@@ -25,7 +25,12 @@ export default function FilterComponent(props) {
   }
 
   const filterUnpaid = (reponse) => {
-    const filteredTransaction = reponse.filter((transaction) => transaction.paid === false)
+    let filteredTransaction
+    if (!currentUser.UserAdmin) {
+      filteredTransaction = reponse.filter((transaction) => transaction.paid === false && transaction.userID === currentUser.id)
+    } else {
+      filteredTransaction = reponse.filter((transaction) => transaction.paid === false)
+    }
     setFilter(filteredTransaction)
     getTotal(reponse)
     setIsPaid(false)
@@ -71,3 +76,4 @@ export default function FilterComponent(props) {
     </>
   )
 }
+
