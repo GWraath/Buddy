@@ -24,7 +24,7 @@ export default function debtHome() {
   // //get the debts
   useEffect(() => {
     setPageType('debts')
-}, [])
+}, [query])
 
   return (
     <>

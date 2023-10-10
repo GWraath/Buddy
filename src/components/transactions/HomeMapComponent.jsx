@@ -30,7 +30,7 @@ export default function HomeMapComponent(props) {
                                 {props.paid == true ? <PaidComponent debt={debt} /> : <OverdueComponent debt={debt} />}
                             </CardContent>
                             <CardActions sx={{ display: 'flex', justifyContent: 'center'}}>
-                                 {props.currentUser && props.currentUser.UserAdmin ?<PaidDeleteComponent debt={debt} currentUser={props.currentUser} /> : null }
+                                 {props.currentUser && props.currentUser.UserAdmin ?<PaidDeleteComponent debt={debt} currentUser={props.currentUser}/> : null }
                             </CardActions>
                         </Card>
                     </Grid>
