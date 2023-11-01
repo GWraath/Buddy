@@ -16,18 +16,20 @@ export default function DebtSearch(props) {
   const {setUsers} = useContext(UsersContext);
   const {pageType} = useContext(PageTypeContext);
   const {query, setQuery} = useContext(SearchContext);
+
+  useEffect(() => {
+    setQuery(null)
+  },[query])
   
   //if the textfield is empty and button is pushed, reloads the screen. if not, sets the query with input.
   const setTheQuery = () => {
+    console.log(textField)
     setQuery(textField)
-    if (textField==='') {
-      window.location.reload()
-    }
   }
 
   return (
       <div>
-        <TextField InputLabelProps={{style: { color: '#4A8E51', borderColor: '#4A8E51'}}}  label="search" variant='filled' type="text" value={textField} onChange={(e)=>setTextField(e.target.value)}/><Button variant="outlined" id="searchButton" size="small" onClick={()=>setTheQuery()}><SearchIcon sx={{ mr: 2 }} /></Button>
+        <TextField InputLabelProps={{style: { color: '#4A8E51', borderColor: '#4A8E51'}}}  label="search" variant='filled' type="text" value={textField} onChange={(e)=>setTextField(e.target.value)}/><Button id="searchButton" size="small" onClick={()=>setTheQuery()}><SearchIcon sx={{ mr: 2 }} /></Button>
         {query?<Axios setResponse={setDebts} call={'get'} type={pageType} id={query}/>:null}
       </div>
       
