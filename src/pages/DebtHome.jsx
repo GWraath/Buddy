@@ -30,7 +30,7 @@ export default function debtHome() {
     <>
       <CssBaseline />
       <main>
-        {debts && query===''?<Axios setResponse={setDebts} call={'get'} type={'debts'}/>:null}
+        {debts && query.doISearch===false?<Axios setResponse={setDebts} call={'get'} type={'debts'}/>:null}
         <Container sx={{ py: 8 }} maxWidth="md">
           {currentUser?<FilterComponent debts={debts} currentUser={currentUser}/>:null}
         </Container>

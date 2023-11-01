@@ -8,7 +8,7 @@ export const SearchContext = React.createContext();
 // SearchContext function to provide user data to components
 export const SearchHolder = (props) => {
 
-    const [query, setQuery] = useState('')
+    const [query, setQuery] = useState({query: '', doISearch: false})
 
     return (
         // Providing the current user and handleUser function to the context object

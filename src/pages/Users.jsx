@@ -37,7 +37,7 @@ export default function debtHome() {
     <>
       <CssBaseline />
       <main>
-        {users && query===''?<Axios setResponse={setUsers} call={'get'} type={'users'}/>:null}
+        {users && query.doISearch===false?<Axios setResponse={setUsers} call={'get'} type={'users'}/>:null}
         <Container sx={{ py: 8 }} maxWidth="md">
           {/* End hero unit */}
           <UserComponent users={users} currentUser={currentUser}/>
