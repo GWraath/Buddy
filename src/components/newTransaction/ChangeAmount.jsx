@@ -9,7 +9,7 @@ export default function ChangeAmount(props) {
                 <>
                     <TextField
                         type="number"
-                        onChange={(e) => props.setAmount(e.target.value)}
+                        onChange={(e) => props.setAmount(parseInt(e.target.value))}
                         label="Custom Amount"
                     />
                     <br />
