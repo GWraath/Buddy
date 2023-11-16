@@ -1,4 +1,5 @@
 import './App.css';
+import './SeedFlower.css'
 import React from 'react';
 import Navbar from './NavBar';
 import AppRoutes from './routes/AppRoutes';

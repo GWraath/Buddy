@@ -11,6 +11,7 @@ import Theme from '../theme/Theme';
 import { UserInfoEdit } from '../pages/UserTotalEdit';
 import ChatApp from '../pages/Chat';
 import ProtectedRoute from './ProtectedRoute';
+import SeedFlower from '../pages/SeedFlower';
 
 
 export default function AppRoutes() {
@@ -25,6 +26,7 @@ export default function AppRoutes() {
                 <Route path='/userinfo' >
                     <Route path=':id' element={<ProtectedRoute><Theme component={<UserInfoEdit />} /></ProtectedRoute>} />
                 </Route>
+                <Route path='/ani' element={<ProtectedRoute><Theme component={<SeedFlower />} /></ProtectedRoute>} />
                 <Route path='/chat' element={<ProtectedRoute><Theme component={<ChatApp />} /></ProtectedRoute>} />
                 <Route path='/' element={<ProtectedRoute><Theme component={<DebtHome />} /></ProtectedRoute>} />
                 <Route path='/profile' element={<ProtectedRoute><Theme component={<Profile />} /></ProtectedRoute>} />
