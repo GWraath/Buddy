@@ -24,15 +24,15 @@ export default function FilterComponent(props) {
     setIsPaid(true)
   }
 
-  const filterUnpaid = (reponse) => {
+  const filterUnpaid = (response) => {
     let filteredTransaction
     if (!currentUser.UserAdmin) {
-      filteredTransaction = reponse.filter((transaction) => transaction.paid === false && transaction.userID === currentUser.id)
+      filteredTransaction = response.filter((transaction) => transaction.paid === false && transaction.userID === currentUser.id)
     } else {
-      filteredTransaction = reponse.filter((transaction) => transaction.paid === false)
+      filteredTransaction = response.filter((transaction) => transaction.paid === false)
     }
     setFilter(filteredTransaction)
-    getTotal(reponse)
+    getTotal(response)
     setIsPaid(false)
   }
 
