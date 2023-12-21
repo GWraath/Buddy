@@ -11,7 +11,6 @@ Users.init({
         type: DataTypes.INTEGER, allowNull: false, autoIncrement: true, primaryKey: true,
         indexes: [{ constraint: 'debts_ibfk_2' }],
     },
-
     name: {
         type: DataTypes.STRING, allowNull: false, required: true,
         // indexes: [{ constraint: 'debts_ibfk_2' }],
@@ -21,17 +20,13 @@ Users.init({
     },
     username: {
         type: DataTypes.STRING, allowNull: false, required: true,
-     
     },
     password: {
         type: DataTypes.STRING, allowNull: false, required: true,
-     
     },
     UserAdmin: {
         type: DataTypes.INTEGER, allowNull: true, required: true
     },
-   
-   
 },
     {
         sequelize: sequelizeInstance, modelName: 'Users', timestamps: true, freezeTableName: true

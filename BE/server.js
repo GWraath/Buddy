@@ -32,6 +32,9 @@ app.use('/api/debts', debtRoutes);
 let userRoutes = require('./routes/userRoutes');
 app.use('/api/users', userRoutes);
 
+let dynamicRoutes = require('./routes/dynamicRoutes');
+app.use('/api/dynamic', dynamicRoutes);
+
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

@@ -8,8 +8,7 @@ const storeVehicles = async () => {
 
     let response = await axios.get('https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/car?format=json')
     
-        // const cars = response.data.Results;
-        const cars = [{make: 'ford', id: 1}, {make: 'ferrari', id: 2}, {make: 'chrysler', id: 3}]
+        const cars = response.data.Results;
         console.log(cars)
 
         for(let car of cars) {
