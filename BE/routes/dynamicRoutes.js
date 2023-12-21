@@ -31,7 +31,7 @@ router.post('/login', (req, res) => {
 });
 
 router.put('/put/:id', (req, res) => {
-    Controllers.validatePasswordOfUser(req, res)
+    Controllers.updateWhatever(req, res)
 })
 
 router.delete('/delete/:id', (req, res) => {

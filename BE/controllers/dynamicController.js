@@ -56,15 +56,15 @@ const getWhateverByUserID = (req, res) => {
     })
 }
 
-const createWhatever = (data, req, res) => {
+const createWhatever = (req, res) => {
     const modelName = req.query.whatever
     const Model = Models[modelName]
-    console.log(Models)
+    console.log(req.body)
 
     if (!Model) {
         return res.status(400).send({ result: 400, error: 'Invalid model name' });
     }
-    Model.create(data).then(function (data) {
+    Model.create(req.body).then(function (data) {
         res.send({ result: 200, data: data })
     }).catch(err => {
         throw err
