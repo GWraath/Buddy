@@ -21,11 +21,12 @@ export default function Theme(props) {
         <Box
                 sx={{
                     bgcolor: 'background.paper',
-                    pt: 8,
-                    pb: 6,
+                    pt: 0,
+                    pb: 0,
+                    mt: -10,
                 }}
                 >
-                    <Container maxWidth="sm">
+                    <Container maxWidth="m">
                         <Typography
                         component="h1"
                         variant="p"
@@ -38,21 +39,6 @@ export default function Theme(props) {
                     </Container>
                 </Box>
             </main>
-      {/* Footer */}
-      <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
-        <Typography variant="h6" align="center" gutterBottom>
-          Footer
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="text.secondary"
-          component="p"
-        >
-          Something here to give the footer a purpose!
-        </Typography>
-      </Box>
-      {/* End footer */}
     </ThemeProvider>
   );
 }

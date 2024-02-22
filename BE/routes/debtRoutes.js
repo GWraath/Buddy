@@ -1,41 +1,59 @@
 
 const express = require("express");
 const router = express.Router();
-const Controllers = require("../controllers/debtController");
+const Controllers = require("../controllers");
+const rateLimit = require('express-rate-limit');
 
-router.get('/', (req, res) => {
-    console.log(req.query.limit)  
-    Controllers.getDebts(req, res);
+// Create a rate limiter that allows one request per second
+const getLimiter = rateLimit({
+    windowMs: 1000, // 1 second
+    max: 1, // 1 request per windowMs
+  });
+
+const postLimiter = rateLimit({
+    windowMs: 1000, // 1 second
+    max: 1, // 1 request per windowMs
+  }); 
+
+router.get('/', getLimiter, (req, res) => { 
+    Controllers.debtController.getDebts(req, res);
+    console.log(res.err)
+})
+
+router.get('/test', getLimiter, (req, res) => { 
+    Controllers.dynamicController.getWhatever(req, res);
 })
 
 router.get('/:id', (req, res) => {
-    Controllers.getDebtsByID(req, res);
+    Controllers.debtController.getDebtsByID(req, res);
 })
 
 router.get('/userdebts/:userid', (req, res) => {
-    Controllers.getDebtsByUserID(req, res);
+    Controllers.debtController.getDebtsByUserID(req, res);
 })
 
-router.post('/create', (req, res) => {
-    // console.log(req.body)
-    Controllers.createDebts(req.body, res)
+router.post('/create', postLimiter, (req, res) => {
+    Controllers.debtController.createDebts(req.body,req, res)
 })
 
 router.put('/put/:id', (req, res) => {
-    console.log('test')
-    Controllers.updateDebts(req, res)
+    Controllers.debtController.updateDebts(req, res)
 })
 
 router.delete('/delete/:id', (req, res) => {
-    Controllers.deleteDebts(req, res)
+    Controllers.debtController.deleteDebts(req, res)
+})
+
+router.delete('/userdebts/:userid', (req, res) => {
+    Controllers.debtController.deleteDebtsByUserID(req, res);
 })
 
 router.lock('/', (req, res) => {  
-    Controllers.lockDebts(req, res);
+    Controllers.debtController.lockDebts(req, res);
 })
 
 router.unlock('/', (req, res) => {  
-    Controllers.unlockDebts(req, res);
+    Controllers.debtController.unlockDebts(req, res);
 })
 
 module.exports = router;

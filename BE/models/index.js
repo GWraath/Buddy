@@ -4,8 +4,8 @@ const Debts = require('./debts') //require the model
 const Users = require('./users') //require the model
 
 async function init() {
-    await Debts.sync();
     await Users.sync();
+    await Debts.sync();
   
     
     //sync the model

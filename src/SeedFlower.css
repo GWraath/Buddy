@@ -1,0 +1,55 @@
+.seedToStem{
+    clip-path: ellipse(20px 10px);
+    background-color: black;
+    width:400px;
+    height: 200px;
+    animation-name: seedToStem;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+/* @keyframes seedToStem {
+    from {
+        clip-path: ellipse(20px 10px);
+    }
+    30% {
+        clip-path: ellipse(1px 90px);
+    }
+    to {
+        clip-path: ellipse(1px 90px);
+    }
+} */
+
+
+
+
+.centerFlower {
+    background-color: black;
+    clip-path: ellipse(10px 10px);
+    width:400px;
+    height: 200px;
+    position: relative;
+    bottom: 770px;
+    animation-name: centerFlower;
+    /* animation-name: topFlower;
+    animation-name: leftFlower;
+    animation-name: rightFlower;
+    animation-name: bottomFlower; */
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes centerFlower {
+    from {
+    clip-path: ellipse(0px 0px);
+    }
+    30% {
+    clip-path: ellipse(0px 0px);
+    }
+    60% {
+    clip-path: ellipse(10px 10px);
+    }
+    to {
+        clip-path: ellipse(0px 0px);
+    }
+}

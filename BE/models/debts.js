@@ -11,21 +11,26 @@ Debts.init({
     },
 
     userID: {
-        type: DataTypes.INTEGER, allowNull: true, required: true,
+        type: DataTypes.INTEGER, allowNull: true, required: false,
         references: {
             model: Users, //reference to another model
-            key: 'id' //column name of the referenced model
+            key: "id", //column name of the referenced model
+            indexes: [{ unique: true }],
         }
     },
     // name: {
-    //     type: DataTypes.STRING, allowNull: true, required: true,
+    //     type: DataTypes.STRING, allowNull: true, required: false,
     //     references: {
     //         model: Users, //reference to another model
-    //         key: 'name' //column name of the referenced model
+    //         key: 'name', //column name of the referenced model
+    //         indexes: [{ unique: true }],
     //     }
     // },
+    duedate: {
+        type: DataTypes.DATE, allowNull: true, required: false
+    },
     total: {
-        type: DataTypes.INTEGER, allowNull: false, required: true
+        type: DataTypes.INTEGER, allowNull: false, required: false
     },
     paid: {
         type: DataTypes.BOOLEAN, allowNull: true, required: true

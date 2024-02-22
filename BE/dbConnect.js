@@ -1,5 +1,6 @@
 'use strict';
 require("dotenv").config();
+console.log(process.env.DB_PORT)
 const { Sequelize } = require('sequelize');
 //Sequelize is a package that abstracts out the need to write SQL queries,
 //relying instead on their models to do it for you
